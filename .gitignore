@@ -1,0 +1,8 @@
+*/obj/
+.vs/
+*/bin/
+*/*/obj
+*/*/bin
+*/*.user
+/.vscode
+.DS_Store
