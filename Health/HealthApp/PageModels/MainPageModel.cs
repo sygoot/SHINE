@@ -171,6 +171,9 @@ namespace HealthApp.PageModels
             OnPropertyChanged(nameof(HasCompletedTasks));
             Tasks = new(Tasks);
             await AppShell.DisplayToastAsync("All cleaned up!");
+
+            //TEST healtd connect
+            _ = await _healthService.ExampleAsync();
         }
     }
 }

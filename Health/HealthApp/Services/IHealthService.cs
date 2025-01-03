@@ -2,5 +2,6 @@
 {
     public interface IHealthService
     {
+        public Task<string> ExampleAsync();
     }
 }
