@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.FoodMainPage"
+             Title="Jedzenie"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <Grid RowDefinitions="*,Auto" Padding="20">
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Weekly Calorie Intake Overview -->
+                <Border BackgroundColor="{StaticResource Gray200}"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10">
+                    <Label Text="[Weekly Calorie Intake Placeholder]"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource Gray500}" />
+                </Border>
+
+                <!-- Calorie Target and Current Progress -->
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+
+                    <!-- Calorie Target Button -->
+                    <Button Text="Cel: 2500 kcal"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HorizontalOptions="Center" />
+
+                    <!-- Heart Representation -->
+                    <Image Source="heart_placeholder.png"
+                           WidthRequest="150"
+                           HeightRequest="150"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+                    <!-- Current Calorie Count -->
+                    <Label Text="1200 kcal"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource White}" />
+                </VerticalStackLayout>
+
+                <!-- Nutritional Summary -->
+                <Border BackgroundColor="{StaticResource Gray200}"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10">
+                    <Label Text="Podsumowanie składników odżywczych"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource TextPrimary}" />
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Bar -->
+        <Grid Grid.Row="1" BackgroundColor="{StaticResource Gray200}" Padding="10">
+            <Button Text="Dodaj posiłek"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

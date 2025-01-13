@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.SleepAddDataPage"
+             Title="Add Sleep Session"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <Grid RowDefinitions="*,Auto" Padding="20">
+
+        <!-- Main Content -->
+        <VerticalStackLayout Grid.Row="0" Spacing="20">
+
+            <!-- Date Picker Button -->
+            <Button Text="Today"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Clicked="OnDatePickerButtonClicked" />
+
+            <!-- Sleep and Wake Time Selectors -->
+            <Grid RowSpacing="20" ColumnSpacing="10" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Sleep Time -->
+                <Label Text="Bedtime"
+                       Grid.Row="0" Grid.Column="0"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource White}" />
+                <Label Text="Wake"
+                       Grid.Row="0" Grid.Column="1"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource White}" />
+
+                <Label Text="23:00" Grid.Row="1" Grid.Column="0" 
+                       HorizontalOptions="Center" 
+                       TextColor="{StaticResource White}" />
+                <Label Text="07:00" Grid.Row="1" Grid.Column="1" 
+                       HorizontalOptions="Center" 
+                       TextColor="{StaticResource White}" />
+            </Grid>
+
+        </VerticalStackLayout>
+
+        <!-- Detailed Time Adjustment Popup -->
+        <Border BackgroundColor="{StaticResource Gray200}"
+                StrokeShape="RoundRectangle 10" Padding="20"
+                VerticalOptions="End"
+                Grid.Row="1">
+            <Grid RowSpacing="10" ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Bedtime Button -->
+                <Button Text="Bedtime"
+                        Grid.Row="0" Grid.Column="0"
+                        FontAttributes="Bold"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource TextPrimary}"
+                        HorizontalOptions="Start" />
+
+                <!-- Wake Button -->
+                <Button Text="Wake"
+                        Grid.Row="0" Grid.Column="1"
+                        FontAttributes="Bold"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource TextPrimary}"
+                        HorizontalOptions="End" />
+
+                <!-- Shared Time Display -->
+                <Label Text="07:00" 
+                       Grid.Row="1" Grid.ColumnSpan="2"
+                       FontSize="24" 
+                       HorizontalOptions="Center" 
+                       TextColor="{StaticResource TextPrimary}" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

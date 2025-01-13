@@ -1,6 +1,6 @@
 ﻿namespace HealthApp.PageModels
 {
-    partial class MainPageModel
+    class ChooseSignUpSignInPageModel
     {
     }
 }

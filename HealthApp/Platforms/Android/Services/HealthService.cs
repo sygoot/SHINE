@@ -10,7 +10,6 @@ using AndroidX.Health.Connect.Client.Units;
 using HealthApp.Platforms.Android.Helpels;
 using Java.Time;
 using Java.Util;
-using Kotlin.Jvm;
 using Microsoft.Extensions.Logging;
 
 namespace HealthApp.Services
@@ -73,32 +72,32 @@ namespace HealthApp.Services
         //        _logger.LogError(e, "Error reading step records.");
         //    }
         //}
-        public async Task ReadStepsByTimeRange(IHealthConnectClient healthConnectClient, DateTime startTime, DateTime endTime)
-        {
-            try
-            {
-                var startInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(startTime).ToUnixTimeMilliseconds());
-                var endInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(endTime).ToUnixTimeMilliseconds());
+        //public async Task ReadStepsByTimeRange(IHealthConnectClient healthConnectClient, DateTime startTime, DateTime endTime)
+        //{
+        //    try
+        //    {
+        //        var startInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(startTime).ToUnixTimeMilliseconds());
+        //        var endInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(endTime).ToUnixTimeMilliseconds());
 
-                var response = await Task.Run(() => healthConnectClient.ReadRecords(
-                    new(
-                        JvmClassMappingKt.GetKotlinClass(Java.Lang.Class.FromType(typeof(StepsRecord))),
-                        TimeRangeFilter.Between(startInstant, endInstant),
-                        [],
-                        false,
-                        10,
-                        null
-                    ),
-                    null
-                ));
+        //        var response = await Task.Run(() => healthConnectClient.ReadRecords(
+        //            new(
+        //                JvmClassMappingKt.GetKotlinClass(Java.Lang.Class.FromType(typeof(StepsRecord))),
+        //                TimeRangeFilter.Between(startInstant, endInstant),
+        //                [],
+        //                false,
+        //                10,
+        //                null
+        //            ),
+        //            null
+        //        ));
 
-                _logger.LogInformation($"Read {response} step records.");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error reading step records.");
-            }
-        }
+        //        _logger.LogInformation($"Read {response} step records.");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogError(e, "Error reading step records.");
+        //    }
+        //}
         public Instant? DateTimeToInstant(DateTime date)
             => Instant.OfEpochSecond(((DateTimeOffset)date).ToUnixTimeSeconds());
 
@@ -138,7 +137,6 @@ namespace HealthApp.Services
                     throw new InvalidOperationException("Health connect provider update required");
                 }
 
-
                 if (OperatingSystem.IsAndroidVersionAtLeast(26) && (availabilityStatus == HealthConnectClient.SdkAvailable))
                 {
 
@@ -147,8 +145,6 @@ namespace HealthApp.Services
                     var dataOriginFilter = new List<DataOrigin>();
 
                     var request = new AggregateGroupByDurationRequest(metrics, TimeRangeFilter.After(startTime), Duration.OfDays(1), dataOriginFilter);
-
-
 
                     var healthConnectClientHelper = new HealthConnectClientHelper(HealthConnectClient.GetOrCreate(Android.App.Application.Context));
 
@@ -166,7 +162,6 @@ namespace HealthApp.Services
                         var Result = await healthConnectClientHelper.AggregateGroupByDuration(request);
                         var StepCountTotal = Result.FirstOrDefault(x => x.Result.Contains(StepsRecord.CountTotal))?.Result.Get(StepsRecord.CountTotal).JavaCast<Java.Lang.Number>();
                         var DistanceTotal = Result.FirstOrDefault(x => x.Result.Contains(DistanceRecord.DistanceTotal))?.Result.Get(DistanceRecord.DistanceTotal).JavaCast<AndroidX.Health.Connect.Client.Units.Length>();
-
 
                         if (StepCountTotal != null)
                         {

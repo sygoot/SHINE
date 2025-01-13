@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.SleepTipPage"
+             Title="Sleep tip #1"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Tip Header -->
+        <Border BackgroundColor="{StaticResource Gray200}" Padding="10" StrokeShape="RoundRectangle 5">
+            <Grid ColumnDefinitions="*,50">
+                <Label Text="Placeholder text for the tip."
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       VerticalOptions="Center" />
+                <CheckBox HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          Grid.Column="1" />
+            </Grid>
+        </Border>
+
+        <!-- Tip Details -->
+        <Label Text="Detailed explanation of the sleep tip goes here."
+               TextColor="{StaticResource White}"
+               FontSize="16"
+               LineBreakMode="WordWrap" />
+
+        <Label Text="More details and extended description about the tip."
+               TextColor="{StaticResource White}"
+               FontSize="16"
+               LineBreakMode="WordWrap" />
+
+        <Label Text="Additional context and helpful information for the tip."
+               TextColor="{StaticResource White}"
+               FontSize="16"
+               LineBreakMode="WordWrap" />
+
+        <!-- Read More Section -->
+        <Label Text="Read: Additional resources or articles related to this tip."
+               TextColor="{StaticResource Accent}"
+               FontSize="16"
+               FontAttributes="Italic"
+               LineBreakMode="WordWrap" />
+
+    </VerticalStackLayout>
+</ContentPage>

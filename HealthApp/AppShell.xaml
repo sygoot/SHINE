@@ -9,7 +9,13 @@
     Title="HealthApp">
 
     <ShellContent
-        Title="Dashboard"
+        Title="Choose Action"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}"
+        Route="choose" />
+    
+    <ShellContent
+        Title="Main"
         Icon="{StaticResource IconDashboard}"
         ContentTemplate="{DataTemplate pages:MainPage}"
         Route="main" />
@@ -25,6 +31,86 @@
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:ManageMetaPage}"
         Route="manage" />
+
+    <ShellContent
+        Title="Login Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="login" />
+
+    <ShellContent
+        Title="Register Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:RegisterPage}"
+        Route="register" />
+
+    <ShellContent
+        Title="Register Confirmation Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}"
+        Route="registerConfirmation" />   
+    
+    <ShellContent
+        Title="Sleep Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepMainPage}"
+        Route="sleepMain" />
+
+    <ShellContent
+        Title="Sleep Add Data"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepAddDataPage}"
+        Route="sleepAddData" />
+
+    <ShellContent
+        Title="Sleep Tip Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepTipPage}"
+        Route="sleepTipPage" />
+
+    <ShellContent
+        Title="Steps Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:StepsMainPage}"
+        Route="stepsMainPage" />
+    
+    <ShellContent
+        Title="Water Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:WaterMainPage}"
+        Route="waterMainPage" />
+    
+    <ShellContent
+        Title="Profile Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ProfileMainPage}"
+        Route="profileMainPage" />
+    
+    <ShellContent
+        Title="Food Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodMainPage}"
+        Route="foodMainPage" />
+
+    <ShellContent
+        Title="Food Add Meal Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodAddMealPage}"
+        Route="foodAddMealPage" />
+
+    <ShellContent
+        Title="Food Portion Details"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}"
+        Route="foodPortionDetailsPage" />
+
+    <ShellContent
+        Title="Food Meal Details"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}"
+        Route="foodMealDetailsPage" />
+
+
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">
