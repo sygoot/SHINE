@@ -2,7 +2,7 @@
 
 namespace HealthApp.PageModels
 {
-    class ChooseSignUpSignInPageModel : ObservableObject
+    class RegisterPageModel : ObservableObject
     {
     }
 }

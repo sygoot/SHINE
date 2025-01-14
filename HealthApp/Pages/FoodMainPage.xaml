@@ -65,6 +65,7 @@
         <!-- Bottom Bar -->
         <Grid Grid.Row="1" BackgroundColor="{StaticResource Gray200}" Padding="10">
             <Button Text="Dodaj posiłek"
+                    Clicked="NavigateToAddMeal"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="{StaticResource White}"
                     FontAttributes="Bold"

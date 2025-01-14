@@ -54,6 +54,7 @@
 
                 <!-- Confirm Portion Button -->
                 <Button Text="OK"
+                        Clicked="NavigateToAddMeal"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="{StaticResource White}"
                         FontAttributes="Bold"

@@ -3,8 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.SleepMainPage"
+             xmlns:models="clr-namespace:HealthApp.Models"
              Title="Sleep"
              BackgroundColor="{StaticResource PrimaryDark}">
+
+    <!-- Command binding for page appearing -->
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="Appearing"
+            Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
@@ -29,6 +37,7 @@
 
             <!-- Add Data Button -->
             <Button Text="Add Data"
+                    Clicked="NavigateToAddData"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="{StaticResource White}"
                     FontAttributes="Bold"
@@ -45,50 +54,28 @@
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}" />
 
-                    <!-- Tip 1 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 1: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
+                    <!-- BindableLayout for dynamic tips -->
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Tips}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:Tip">
+                                <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
+                                    <Grid ColumnDefinitions="*,50">
+                                        <Button Text="{Binding Title}"
+                                                BackgroundColor="Transparent"
+                                                TextColor="{StaticResource TextPrimary}"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="Center" />
 
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
+                                        <CheckBox IsChecked="{Binding IsChecked}"
+                                                  HorizontalOptions="Center"
+                                                  VerticalOptions="Center"
+                                                  Grid.Column="1" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
 
-                    <!-- Tip 2 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 2: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
-
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
-
-                    <!-- Tip 3 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 3: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
-
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
                 </VerticalStackLayout>
             </Border>
 
