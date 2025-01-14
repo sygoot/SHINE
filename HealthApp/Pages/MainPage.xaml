@@ -45,6 +45,7 @@
             <Button Grid.Row="1" Grid.Column="0"
                 Text="😴"
                 FontSize="18"
+                Clicked="NavigateToSleep"
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Center"
@@ -54,14 +55,16 @@
                 <Button Grid.Row="1" Grid.Column="1"
                 Text="🏃"
                     FontSize="18"
+                Clicked="NavigateToSteps"
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
                     <Button Grid.Row="3" Grid.Column="0"
-                Text="🍔\nNutrition"
+                Text="🍔"
                         FontSize="18"
+                Clicked="NavigateToFood"
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Center"
@@ -69,8 +72,9 @@
 
 
                         <Button Grid.Row="3" Grid.Column="1"
-                Text="🍻\nHydration"
+                Text="🍻"
                             FontSize="18"
+                Clicked="NavigateToWater"
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Center"

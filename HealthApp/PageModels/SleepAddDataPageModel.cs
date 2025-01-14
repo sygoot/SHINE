@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace HealthApp.PageModels;
-internal class SleepAddDataPageModel
+internal class SleepAddDataPageModel : ObservableObject
 {
 }
