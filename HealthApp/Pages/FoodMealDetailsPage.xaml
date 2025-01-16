@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.FoodMealDetailsPage"
+             Title="Obiad"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Title -->
+            <Label Text="Lista"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="{StaticResource White}"
+                   HorizontalOptions="Start" />
+
+            <!-- Meal Details Table -->
+            <Border BackgroundColor="{StaticResource Gray200}"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10">
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Table Header -->
+                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowDefinitions="Auto">
+                        <Label Text="#" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
+                        <Label Text="Nazwa" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
+                        <Label Text="Ilość" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
+                        <Label Text="B" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
+                        <Label Text="W" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
+                        <Label Text="kcal" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
+                    </Grid>
+
+                    <!-- First Ingredient Row -->
+                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
+                        <Label Text="1" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
+                        <Label Text="Kurczak" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
+                        <Label Text="100g" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
+                        <Label Text="20g" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
+                        <Label Text="1g" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
+                        <Label Text="150" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
+                        <HorizontalStackLayout Grid.Column="5" HorizontalOptions="End">
+                            <Button Text="✎" FontSize="12" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+                            <Button Text="❌" FontSize="12" BackgroundColor="Transparent" TextColor="Red" />
+                        </HorizontalStackLayout>
+                    </Grid>
+
+                    <!-- Second Ingredient Row -->
+                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
+                        <Label Text="2" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
+                        <Label Text="Ziemniak" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
+                        <Label Text="100g" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
+                        <Label Text="2g" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
+                        <Label Text="20g" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
+                        <Label Text="300" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
+                        <HorizontalStackLayout Grid.Column="5" HorizontalOptions="End">
+                            <Button Text="✎" FontSize="12" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+                            <Button Text="❌" FontSize="12" BackgroundColor="Transparent" TextColor="Red" />
+                        </HorizontalStackLayout>
+                    </Grid>
+
+                    <!-- Summary Row -->
+                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
+                        <Label Text="" Grid.Column="0" />
+                        <Label Text="Suma" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
+                        <Label Text="200g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
+                        <Label Text="22g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
+                        <Label Text="21g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
+                        <Label Text="450" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:HealthApp.PageModels"
+             xmlns:controls="clr-namespace:HealthApp.Pages.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.ChooseSignUpSignInPage"
+             x:DataType="pageModels:ChooseSignUpSignInPageModel"
+             BackgroundColor="{StaticResource PrimaryDark}"
+             Title="Welcome to SHINE">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                EventName="Appearing"
+                Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="30" RowSpacing="20" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Logo Placeholder -->
+
+
+        <Image Source="Resources/Images/logo.svg"
+               Grid.Row="0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               WidthRequest="100"
+               HeightRequest="100" />
+
+        <!-- Sign Up Button -->
+        <Button Text="Sign Up"
+                Clicked="NavigateToRegister"
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="50"
+                Command="{Binding SignUpCommand}" />
+
+        <!-- Sign In Button -->
+        <Button Text="Sign In"
+                Clicked="NavigateToLogin"
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="50"
+                Command="{Binding SignInCommand}" />
+    </Grid>
+</ContentPage>

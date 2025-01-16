@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.RegisterConfirmationPage"
+             Title="Register Confirmation"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <Grid Padding="30" RowSpacing="20" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Logo -->
+        <Image Source="Resources/Images/logo.svg"
+               Grid.Row="0"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               WidthRequest="200"
+               HeightRequest="200" />
+
+        <!-- Confirmation Text -->
+        <Label Text="Thank you for registering!"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="24"
+               TextColor="{StaticResource White}" />
+
+        <Label Text="A confirmation email has been sent to your address. Please click the link in the email to confirm your account."
+               Grid.Row="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="18"
+               TextColor="{StaticResource White}" />
+
+
+    </Grid>
+</ContentPage>

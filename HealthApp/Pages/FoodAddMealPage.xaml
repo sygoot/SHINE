@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.FoodAddMealPage"
+             Title="Obiad"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Ingredients Button -->
+        <Button Text="0"
+                Clicked="NavigateToMealDetails"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="{StaticResource White}"
+                FontAttributes="Bold"
+                CornerRadius="50"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                WidthRequest="50"
+                HeightRequest="50" />
+
+        <!-- Search Bar -->
+        <Border BackgroundColor="{StaticResource Gray200}"
+                StrokeShape="RoundRectangle 10"
+                Padding="10">
+            <HorizontalStackLayout>
+                <Entry Placeholder="Wpisz nazwę produktu"
+                       TextColor="{StaticResource TextPrimary}"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="FillAndExpand" />
+                <Button Text="&#x1F50D;"
+                        FontSize="18"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource TextPrimary}" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- Search Results -->
+        <Border BackgroundColor="{StaticResource Gray200}"
+                StrokeShape="RoundRectangle 10"
+                Padding="10">
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Option 1 -->
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="False"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Start" />
+                    <Button Text="Kurczak w panierce"
+                            Clicked="NavigateToPortionDetails"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- Option 2 -->
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="False"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Start" />
+                    <Button Text="Kurczak pierś"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>
