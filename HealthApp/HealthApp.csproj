@@ -82,6 +82,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\HealthApp.FatSecretAPI\HealthApp.FatSecretAPI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Services\HealthService.cs">
 	    <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
 	  </Compile>

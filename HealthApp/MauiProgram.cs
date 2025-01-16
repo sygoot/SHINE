@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using HealthApp.FatSecretAPI;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -28,7 +29,7 @@ namespace HealthApp
             builder.Logging.AddDebug();
             builder.Services.AddLogging(configure => configure.AddDebug());
 #endif
-
+            builder.Services.AddFatSecretAPI();
             builder.Services.AddSingleton<ProjectRepository>();
             builder.Services.AddSingleton<TaskRepository>();
             builder.Services.AddSingleton<CategoryRepository>();
@@ -68,7 +69,6 @@ namespace HealthApp
             builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
             builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
             builder.Services.AddTransientWithShellRoute<MainPage, MainPageModel>("main");
-
 
             return builder.Build();
         }
