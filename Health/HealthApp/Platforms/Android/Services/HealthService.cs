@@ -10,7 +10,6 @@ using AndroidX.Health.Connect.Client.Units;
 using HealthApp.Platforms.Android.Helpels;
 using Java.Time;
 using Java.Util;
-using Kotlin.Jvm;
 using Microsoft.Extensions.Logging;
 
 namespace HealthApp.Services
@@ -73,32 +72,32 @@ namespace HealthApp.Services
         //        _logger.LogError(e, "Error reading step records.");
         //    }
         //}
-        public async Task ReadStepsByTimeRange(IHealthConnectClient healthConnectClient, DateTime startTime, DateTime endTime)
-        {
-            try
-            {
-                var startInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(startTime).ToUnixTimeMilliseconds());
-                var endInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(endTime).ToUnixTimeMilliseconds());
+        //public async Task ReadStepsByTimeRange(IHealthConnectClient healthConnectClient, DateTime startTime, DateTime endTime)
+        //{
+        //    try
+        //    {
+        //        var startInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(startTime).ToUnixTimeMilliseconds());
+        //        var endInstant = Java.Time.Instant.OfEpochMilli(new DateTimeOffset(endTime).ToUnixTimeMilliseconds());
 
-                var response = await Task.Run(() => healthConnectClient.ReadRecords(
-                    new(
-                        JvmClassMappingKt.GetKotlinClass(Java.Lang.Class.FromType(typeof(StepsRecord))),
-                        TimeRangeFilter.Between(startInstant, endInstant),
-                        [],
-                        false,
-                        10,
-                        null
-                    ),
-                    null
-                ));
+        //        var response = await Task.Run(() => healthConnectClient.ReadRecords(
+        //            new(
+        //                JvmClassMappingKt.GetKotlinClass(Java.Lang.Class.FromType(typeof(StepsRecord))),
+        //                TimeRangeFilter.Between(startInstant, endInstant),
+        //                [],
+        //                false,
+        //                10,
+        //                null
+        //            ),
+        //            null
+        //        ));
 
-                _logger.LogInformation($"Read {response} step records.");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error reading step records.");
-            }
-        }
+        //        _logger.LogInformation($"Read {response} step records.");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogError(e, "Error reading step records.");
+        //    }
+        //}
         public Instant? DateTimeToInstant(DateTime date)
             => Instant.OfEpochSecond(((DateTimeOffset)date).ToUnixTimeSeconds());
 
