@@ -11,6 +11,7 @@ using HealthApp.Platforms.Android.Helpels;
 using Java.Time;
 using Java.Util;
 using Microsoft.Extensions.Logging;
+using Models.Services;
 
 namespace HealthApp.Services
 {
@@ -89,7 +90,7 @@ namespace HealthApp.Services
                         var Result = await healthConnectClientHelper.AggregateGroupByDuration(request);
                         var StepCountTotal = Result.FirstOrDefault(x => x.Result.Contains(StepsRecord.CountTotal))?.Result.Get(StepsRecord.CountTotal).JavaCast<Java.Lang.Number>();
                         var DistanceTotal = Result.FirstOrDefault(x => x.Result.Contains(DistanceRecord.DistanceTotal))?.Result.Get(DistanceRecord.DistanceTotal).JavaCast<AndroidX.Health.Connect.Client.Units.Length>();
-
+                        //new Android.Health.Connect.DataTypes.SleepSessionRecord.Stage().Type
                         if (StepCountTotal != null)
                         {
                             var resultString = StepCountTotal.ToString() + " " + DistanceTotal?.Meters.ToString();
