@@ -1,4 +1,4 @@
-﻿namespace HealthApp.Services
+﻿namespace Models.Services
 {
     public interface IHealthService
     {

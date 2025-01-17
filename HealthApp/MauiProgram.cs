@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using HealthApp.FatSecretAPI;
+using HealthApp.FirestoreDatabase;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace HealthApp
@@ -29,7 +31,14 @@ namespace HealthApp
             builder.Logging.AddDebug();
             builder.Services.AddLogging(configure => configure.AddDebug());
 #endif
+            builder.Services.AddSerilog(new LoggerConfiguration()
+                .WriteTo.Debug()
+                .WriteTo.File(Path.Combine(FileSystem.Current.AppDataDirectory, "Log.txt"), rollingInterval: RollingInterval.Day)
+                .CreateLogger());
+
             builder.Services.AddFatSecretAPI();
+            builder.Services.RegisterDatabaseServices();
+
             builder.Services.AddSingleton<ProjectRepository>();
             builder.Services.AddSingleton<TaskRepository>();
             builder.Services.AddSingleton<CategoryRepository>();

@@ -1,10 +1,2 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models;
-internal class Sleep
-{
-}
+﻿namespace Models;
+public sealed record Sleep(DateTime StartTime, DateTimeOffset StartZoneOffset, DateTime EndTime, DateTimeOffset EndZoneOffset, List<SleepStage> SleepStages, bool DataSent = false);
