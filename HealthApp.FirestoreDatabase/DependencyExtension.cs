@@ -3,6 +3,9 @@ using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using Firebase.Database;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
+using Models.Services.Database;
+using Models.Services.Database.Tables;
 
 namespace HealthApp.FirestoreDatabase
 {
@@ -20,8 +23,12 @@ namespace HealthApp.FirestoreDatabase
 
             serviceCollection.AddSingleton(serviceProvider => new FirebaseClient("https://health-app-sygoot-default-rtdb.europe-west1.firebasedatabase.app/", new()
             {
-                AuthTokenAsyncFactory = () => serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
+                AuthTokenAsyncFactory = async () => await serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
             }));
+
+            serviceCollection.AddTransient<IUserTable, Tables.UserTable>();
+            serviceCollection.AddTransient<Table<Ingredient>, Tables.IngredientTable>();
+            serviceCollection.AddTransient<IDatabaseService, DatabaseService>();
         }
     }
 }
