@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.SleepMainPage"
-             xmlns:models="clr-namespace:HealthApp.Models"
              Title="Sleep"
              BackgroundColor="{StaticResource PrimaryDark}">
 
@@ -53,28 +52,6 @@
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}" />
-
-                    <!-- BindableLayout for dynamic tips -->
-                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Tips}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="models:Tip">
-                                <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                                    <Grid ColumnDefinitions="*,50">
-                                        <Button Text="{Binding Title}"
-                                                BackgroundColor="Transparent"
-                                                TextColor="{StaticResource TextPrimary}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center" />
-
-                                        <CheckBox IsChecked="{Binding IsChecked}"
-                                                  HorizontalOptions="Center"
-                                                  VerticalOptions="Center"
-                                                  Grid.Column="1" />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </VerticalStackLayout>
 
                 </VerticalStackLayout>
             </Border>

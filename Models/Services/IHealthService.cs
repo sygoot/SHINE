@@ -2,6 +2,8 @@
 {
     public interface IHealthService
     {
-        public Task<string> ExampleAsync();
+        public Task<int> ExampleAsync();
+        public Task<Dictionary<string, object>> FetchHealthDataAsync(string dataType, string timeRange = "today");
+
     }
 }
