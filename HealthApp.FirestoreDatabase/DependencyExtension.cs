@@ -23,11 +23,18 @@ namespace HealthApp.FirestoreDatabase
 
             serviceCollection.AddSingleton(serviceProvider => new FirebaseClient("https://health-app-sygoot-default-rtdb.europe-west1.firebasedatabase.app/", new()
             {
-                AuthTokenAsyncFactory = async () => await serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
+                AuthTokenAsyncFactory = () => serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
             }));
 
             serviceCollection.AddTransient<IUserTable, Tables.UserTable>();
             serviceCollection.AddTransient<Table<Ingredient>, Tables.IngredientTable>();
+            serviceCollection.AddTransient<Table<Meal>, Tables.MealTable>();
+            serviceCollection.AddTransient<Table<Sleep>, Tables.SleepTable>();
+            serviceCollection.AddTransient<Table<Steps>, Tables.StepsTable>();
+            serviceCollection.AddTransient<Table<Suggestion>, Tables.SuggestionTable>();
+            serviceCollection.AddTransient<Table<Target>, Tables.TargetTable>();
+            serviceCollection.AddTransient<Table<Water>, Tables.WaterTable>();
+
             serviceCollection.AddTransient<IDatabaseService, DatabaseService>();
         }
     }

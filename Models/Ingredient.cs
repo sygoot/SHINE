@@ -20,5 +20,5 @@ namespace Models
         double Sugar,
         double VitaminA,
         double VitaminC,
-        long? Id) : IEntity;
+        long? Id = null) : Entity(Id);
 }

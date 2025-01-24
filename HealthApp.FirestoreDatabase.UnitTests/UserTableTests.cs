@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using Firebase.Auth;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Services.Database;
 using System.Reactive.Linq;
@@ -22,7 +21,7 @@ namespace HealthApp.FirestoreDatabase.UnitTests
                 .Do(_ => Logger.WriteLine("User login success"))
                 .SelectMany(_ => databaseService.UserTable.Add(user))
                 .Do(_ => Logger.WriteLine("User added to database"))
-                .SelectMany(databaseService.UserTable.Get())
+                .SelectMany(_ => databaseService.UserTable.Get())
                 .Do(_ => Logger.WriteLine("User retrieved from database"))
                 .Wait();
 
@@ -41,23 +40,12 @@ namespace HealthApp.FirestoreDatabase.UnitTests
                 .Do(_ => Logger.WriteLine("User login success"))
                 .SelectMany(_ => databaseService.UserTable.Delete())
                 .Do(_ => Logger.WriteLine("User was deleted from database"))
-                .SelectMany(databaseService.UserTable.Get())
+                .SelectMany(_ => databaseService.UserTable.Get())
                 .Do(_ => Logger.WriteLine("User retrieved from database"))
                 .Wait();
 
             Assert.Null(savedUser);
         }
-        private async Task LoginUserAsync()
-        {
-            var testUserEmail = "test@test.com";
-            var testUserPassword = "test_test";
-            var firestoreService = Container.ServiceProvider.GetService<FirebaseAuthClient>();
 
-            Assert.NotNull(firestoreService);
-
-            var userCredentials = await firestoreService.SignInWithEmailAndPasswordAsync(testUserEmail, testUserPassword);
-
-            Assert.Equal(testUserEmail, userCredentials.User.Info.Email);
-        }
     }
 }

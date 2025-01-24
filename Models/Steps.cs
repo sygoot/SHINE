@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Models.Services.Database.Tables;
+
+namespace Models
 {
     /// <summary>
     /// 
@@ -8,5 +10,5 @@
     /// <param name="EndTime"></param>
     /// <param name="EndZoneOffset"></param>
     /// <param name="Count">Range(from = 1, to = 1000000)</param>
-    public sealed record Steps(DateTime StartTime, DateTimeOffset StartZoneOffset, DateTime EndTime, DateTimeOffset EndZoneOffset, int Count);
+    public sealed record Steps(DateTime StartTime, DateTimeOffset StartZoneOffset, DateTime EndTime, DateTimeOffset EndZoneOffset, int Count, long? Id = null) : Entity(Id);
 }

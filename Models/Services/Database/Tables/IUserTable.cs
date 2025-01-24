@@ -8,5 +8,7 @@ namespace Models.Services.Database.Tables
         public IObservable<Unit> Delete();
         public IObservable<Models.User> Get();
         public IObservable<Unit> Update(User entity);
+
+        public IObservable<Models.User> ListenForChanges();
     }
 }

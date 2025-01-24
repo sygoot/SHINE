@@ -45,6 +45,18 @@ namespace HealthApp.FirestoreDatabase.Tables
                 .OnceSingleAsync<Models.User>()
                 .ToObservable();
         }
+
+        public IObservable<Models.User> ListenForChanges()
+        {
+            var loginUser = firebaseAuthClient.User;
+
+            return firebaseClient
+                .Child(TABLE_NAME)
+                .Child(loginUser.Uid)
+                .AsObservable<Models.User>()
+                .Select(firebaseEvent => firebaseEvent.Object);
+        }
+
         public IObservable<Unit> Update(Models.User entity)
         {
             var loginUser = firebaseAuthClient.User;
