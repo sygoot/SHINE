@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Models.Services.Database.Tables;
+
+namespace Models
 {
     public sealed record Ingredient(
         string Name,
@@ -17,5 +19,6 @@
         double Sodium,
         double Sugar,
         double VitaminA,
-        double VitaminC);
+        double VitaminC,
+        long? Id = null) : Entity(Id);
 }

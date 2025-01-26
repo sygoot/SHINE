@@ -3,6 +3,9 @@ using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using Firebase.Database;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
+using Models.Services.Database;
+using Models.Services.Database.Tables;
 
 namespace HealthApp.FirestoreDatabase
 {
@@ -22,6 +25,17 @@ namespace HealthApp.FirestoreDatabase
             {
                 AuthTokenAsyncFactory = () => serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
             }));
+
+            serviceCollection.AddTransient<IUserTable, Tables.UserTable>();
+            serviceCollection.AddTransient<Table<Ingredient>, Tables.IngredientTable>();
+            serviceCollection.AddTransient<Table<Meal>, Tables.MealTable>();
+            serviceCollection.AddTransient<Table<Sleep>, Tables.SleepTable>();
+            serviceCollection.AddTransient<Table<Steps>, Tables.StepsTable>();
+            serviceCollection.AddTransient<Table<Suggestion>, Tables.SuggestionTable>();
+            serviceCollection.AddTransient<Table<Target>, Tables.TargetTable>();
+            serviceCollection.AddTransient<Table<Water>, Tables.WaterTable>();
+
+            serviceCollection.AddTransient<IDatabaseService, DatabaseService>();
         }
     }
 }
