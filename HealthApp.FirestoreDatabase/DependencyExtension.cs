@@ -15,13 +15,13 @@ namespace HealthApp.FirestoreDatabase
         {
             serviceCollection.AddSingleton(new FirebaseAuthClient(new()
             {
-                ApiKey = "AIzaSyB5AGkNP1rhp9OLYIL5LHDt-5yVyzzmtOw",
-                AuthDomain = "health-app-sygoot.firebaseapp.com",
+                ApiKey = "AIzaSyCFasMMK0TfNgqWmVz7Ap_rOCakjJDaZqY",
+                AuthDomain = "shine-sygoot.firebaseapp.com",
                 Providers = [new EmailProvider()],
                 UserRepository = new FileUserRepository("UserRepo")
             }));
 
-            serviceCollection.AddSingleton(serviceProvider => new FirebaseClient("https://health-app-sygoot-default-rtdb.europe-west1.firebasedatabase.app/", new()
+            serviceCollection.AddSingleton(serviceProvider => new FirebaseClient("https://shine-sygoot-default-rtdb.europe-west1.firebasedatabase.app/", new()
             {
                 AuthTokenAsyncFactory = () => serviceProvider.GetRequiredService<FirebaseAuthClient>().User?.GetIdTokenAsync()
             }));
