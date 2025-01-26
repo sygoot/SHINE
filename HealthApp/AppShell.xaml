@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HealthApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:pages="clr-namespace:HealthApp.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="HealthApp">
+
+    <ShellContent
+        Title="Choose Action"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}" />
+
+    <ShellContent
+        Title="Main"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:MainPage}" />
+
+
+    <ShellContent
+        Title="Login Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:LoginPage}" />
+
+    <ShellContent
+        Title="Register Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:RegisterPage}" />
+
+    <ShellContent
+        Title="Register Confirmation Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}" />
+
+    <ShellContent
+        Title="Sleep Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepMainPage}" />
+
+    <ShellContent
+        Title="Sleep Add Data"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepAddDataPage}" />
+
+    <ShellContent
+        Title="Sleep Tip Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:SleepTipPage}" />
+
+    <ShellContent
+        Title="Steps Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:StepsMainPage}" />
+
+    <ShellContent
+        Title="Water Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:WaterMainPage}" />
+
+    <ShellContent
+        Title="Profile Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ProfileMainPage}" />
+
+    <ShellContent
+        Title="Food Main Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodMainPage}" />
+
+    <ShellContent
+        Title="Food Add Meal Page"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodAddMealPage}" />
+
+    <ShellContent
+        Title="Food Portion Details"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}" />
+
+    <ShellContent
+        Title="Food Meal Details"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}" />
+
+
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="15">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
+                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
+                SegmentWidth="40" SegmentHeight="40">
+                <sf:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type sf:SfSegmentItem}">
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}"/>
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}"/>
+                    </x:Array>
+                </sf:SfSegmentedControl.ItemsSource>
+            </sf:SfSegmentedControl>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

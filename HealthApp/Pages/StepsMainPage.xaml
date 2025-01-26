@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.StepsMainPage"
+             Title="Steps"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Weekly Steps Overview -->
+            <Border BackgroundColor="{StaticResource Gray200}"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10">
+                <Label Text="[Weekly Steps Chart Placeholder]"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource Gray500}" />
+            </Border>
+
+            <!-- Steps Progress Section -->
+            <Border BackgroundColor="{StaticResource Gray200}"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="20">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+
+                    <!-- Steps Count -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Image Source="steps_icon_placeholder.png"
+                               WidthRequest="24"
+                               HeightRequest="24" />
+                        <Label Text="{Binding Steps}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}" />
+                    </HorizontalStackLayout>
+
+                    <!-- Fetch Steps Button -->
+                    <Button Text="Fetch Steps"
+                            Command="{Binding FetchStepsCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

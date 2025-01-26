@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.MainPage"
+             Title="Welcome, Username!"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <Grid Padding="20" RowSpacing="20" ColumnSpacing="20" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Text="Yesterday "
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource White}" />
+            <Label Text="Today"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource White}" />
+            <Button Text="Tomorrow"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource White}" />
+        </StackLayout>
+
+
+        <Label Text="😐"
+            FontSize="48"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Grid.Row="2" Grid.ColumnSpan="2" />
+
+            <Button Grid.Row="1" Grid.Column="0"
+                Text="😴"
+                FontSize="18"
+                Clicked="NavigateToSleep"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+
+                <Button Grid.Row="1" Grid.Column="1"
+                Text="🏃"
+                    FontSize="18"
+                Clicked="NavigateToSteps"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+                    <Button Grid.Row="3" Grid.Column="0"
+                Text="🍔"
+                        FontSize="18"
+                Clicked="NavigateToFood"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+
+                        <Button Grid.Row="3" Grid.Column="1"
+                Text="🍻"
+                            FontSize="18"
+                Clicked="NavigateToWater"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

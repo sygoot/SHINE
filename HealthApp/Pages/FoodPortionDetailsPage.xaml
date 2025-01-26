@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="HealthApp.Pages.FoodPortionDetailsPage"
+             Title="Rozmiar Porcji"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Food Portion Selection -->
+        <Border BackgroundColor="{StaticResource Gray200}"
+                StrokeShape="RoundRectangle 10"
+                Padding="10">
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Food Name and Favorite Icon -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Ziemniak z kartoflem"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+                    <Button Text="&#x2606;"
+                            FontSize="18"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+                </Grid>
+
+                <!-- Portion Size Adjustment -->
+                <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto,Auto">
+                    <Label Text="100g"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+                    <Button Text="-"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            CornerRadius="10"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+
+                    <Button Text="+"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            CornerRadius="10"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start" />
+                </Grid>
+
+                <!-- Confirm Portion Button -->
+                <Button Text="OK"
+                        Clicked="NavigateToAddMeal"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="{StaticResource White}"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100" />
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Nutritional Information -->
+        <Border BackgroundColor="{StaticResource Gray200}"
+                StrokeShape="RoundRectangle 10"
+                Padding="10">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Makroskładniki odżywcze (100g)"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="Center" />
+
+                <Label Text="Białka: 2g"
+                       TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Węglowodany: 20g"
+                       TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Tłuszcze: 0g"
+                       TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Kalorie: 90kcal"
+                       TextColor="{StaticResource TextPrimary}" />
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>
