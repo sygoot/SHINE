@@ -39,15 +39,7 @@ namespace HealthApp
             builder.Services.AddFatSecretAPI();
             builder.Services.RegisterDatabaseServices();
 
-            builder.Services.AddSingleton<ProjectRepository>();
-            builder.Services.AddSingleton<TaskRepository>();
-            builder.Services.AddSingleton<CategoryRepository>();
-            builder.Services.AddSingleton<TagRepository>();
-            builder.Services.AddSingleton<SeedDataService>();
-            builder.Services.AddSingleton<ModalErrorHandler>();
             builder.Services.AddSingleton<MainPageModel>();
-            builder.Services.AddSingleton<ProjectListPageModel>();
-            builder.Services.AddSingleton<ManageMetaPageModel>();
             builder.Services.AddSingleton<HealthService>();
 
             // Food-related pages
@@ -75,8 +67,6 @@ namespace HealthApp
             builder.Services.AddTransientWithShellRoute<LoginPage, LoginPageModel>("login");
 
             // Other pages
-            builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
-            builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
             builder.Services.AddTransientWithShellRoute<MainPage, MainPageModel>("main");
 
             return builder.Build();

@@ -90,13 +90,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\HealthApp.FatSecretAPI\HealthApp.FatSecretAPI.csproj" />
 	  <ProjectReference Include="..\HealthApp.FirestoreDatabase\HealthApp.FirestoreDatabase.csproj" />
+	  <ProjectReference Include="..\Models\Models.csproj" />
 	  <ProjectReference Include="..\Suggestions\Suggestions.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Services\HealthService.cs">
-	    <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -145,6 +140,11 @@
 	  <MauiXaml Update="Pages\WaterMainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	  <Folder Include="Utilities\" />
 	</ItemGroup>
 	
 </Project>

@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using HealthApp.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace HealthApp.PageModels
 {
@@ -8,24 +7,37 @@ namespace HealthApp.PageModels
     {
         private readonly HealthService _healthService;
 
-        public ObservableCollection<Tip> Tips { get; }
-
         [ObservableProperty]
         private int _steps;
+
         public StepsMainPageModel(HealthService healthService)
         {
             _healthService = healthService;
-            Tips = new ObservableCollection<Tip>();
+            FetchStepsCommand = new AsyncRelayCommand(LoadStepsAsync);
         }
 
-        private void OnAppearing()
-        {
-            Tips.Clear();
+        public IAsyncRelayCommand FetchStepsCommand { get; }
 
-            // Dodaj przykładowe tipy
-            Tips.Add(new Tip { Title = "Tip 1: Get enough sleep every night", IsChecked = false });
-            Tips.Add(new Tip { Title = "Tip 2: Maintain a regular bedtime schedule", IsChecked = true });
-            Tips.Add(new Tip { Title = "Tip 3: Avoid caffeine before bedtime", IsChecked = false });
+        public async Task LoadStepsAsync()
+        {
+            try
+            {
+                var result = await _healthService.FetchStepsData(DateTime.Today, DateTime.Now);
+
+                if (result != 0)
+                {
+                    Steps = result;
+                }
+                else
+                {
+                    Steps = 0; // Default if no data is found
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                Steps = 0; // Reset in case of error
+            }
         }
     }
 }

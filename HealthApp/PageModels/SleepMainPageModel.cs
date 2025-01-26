@@ -1,21 +1,57 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using HealthApp.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace HealthApp.PageModels
 {
-    class SleepMainPageModel : ObservableObject
+    public partial class SleepMainPageModel : ObservableObject
     {
-        public Command AppearingCommand => new Command(() =>
-        {
-            Tips = new ObservableCollection<Tip>
-    {
-        new Tip { Title = "Tip 1: Placeholder text for the tip.", IsChecked = false },
-        new Tip { Title = "Tip 2: Placeholder text for the tip.", IsChecked = true },
-        new Tip { Title = "Tip 3: Placeholder text for the tip.", IsChecked = false }
-    };
-        });
+        private readonly HealthService _healthService;
 
-        public ObservableCollection<Tip> Tips { get; private set; }
+        [ObservableProperty]
+        private DateTime _sleepStartTime;
+
+        [ObservableProperty]
+        private DateTime _sleepEndTime;
+
+        [ObservableProperty]
+        private TimeSpan _sleepDuration;
+
+        public SleepMainPageModel(HealthService healthService)
+        {
+            _healthService = healthService;
+            FetchSleepCommand = new AsyncRelayCommand(LoadSleepAsync);
+        }
+
+        public IAsyncRelayCommand FetchSleepCommand { get; }
+
+        public async Task LoadSleepAsync()
+        {
+            try
+            {
+                var startingDay = DateTime.Today;
+                var endingDay = DateTime.Now;
+
+                var sleepData = await _healthService.FetchSleepData(startingDay, endingDay);
+
+                if (sleepData != null)
+                {
+                    SleepStartTime = sleepData.StartTime;
+                    SleepEndTime = sleepData.EndTime;
+                    SleepDuration = SleepEndTime - SleepStartTime;
+                }
+                else
+                {
+                    SleepStartTime = DateTime.MinValue;
+                    SleepEndTime = DateTime.MinValue;
+                    SleepDuration = TimeSpan.Zero;
+                }
+            }
+            catch (Exception ex)
+            {
+                SleepStartTime = DateTime.MinValue;
+                SleepEndTime = DateTime.MinValue;
+                SleepDuration = TimeSpan.Zero;
+            }
+        }
     }
 }
