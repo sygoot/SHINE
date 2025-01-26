@@ -11,104 +11,78 @@
     <ShellContent
         Title="Choose Action"
         Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}"
-        Route="choose" />
-    
+        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}" />
+
     <ShellContent
         Title="Main"
         Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:MainPage}"
-        Route="main" />
+        ContentTemplate="{DataTemplate pages:MainPage}" />
 
-    <ShellContent
-        Title="Projects"
-        Icon="{StaticResource IconProjects}"
-        ContentTemplate="{DataTemplate pages:ProjectListPage}"
-        Route="projects" />
-
-    <ShellContent
-        Title="Manage Meta"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
-        Route="manage" />
 
     <ShellContent
         Title="Login Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:LoginPage}"
-        Route="login" />
+        ContentTemplate="{DataTemplate pages:LoginPage}" />
 
     <ShellContent
         Title="Register Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:RegisterPage}"
-        Route="register" />
+        ContentTemplate="{DataTemplate pages:RegisterPage}" />
 
     <ShellContent
         Title="Register Confirmation Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}"
-        Route="registerConfirmation" />   
-    
+        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}" />
+
     <ShellContent
         Title="Sleep Main Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepMainPage}"
-        Route="sleepMain" />
+        ContentTemplate="{DataTemplate pages:SleepMainPage}" />
 
     <ShellContent
         Title="Sleep Add Data"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepAddDataPage}"
-        Route="sleepAddData" />
+        ContentTemplate="{DataTemplate pages:SleepAddDataPage}" />
 
     <ShellContent
         Title="Sleep Tip Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepTipPage}"
-        Route="sleepTipPage" />
+        ContentTemplate="{DataTemplate pages:SleepTipPage}" />
 
     <ShellContent
         Title="Steps Main Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:StepsMainPage}"
-        Route="stepsMainPage" />
-    
+        ContentTemplate="{DataTemplate pages:StepsMainPage}" />
+
     <ShellContent
         Title="Water Main Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:WaterMainPage}"
-        Route="waterMainPage" />
-    
+        ContentTemplate="{DataTemplate pages:WaterMainPage}" />
+
     <ShellContent
         Title="Profile Main Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ProfileMainPage}"
-        Route="profileMainPage" />
-    
+        ContentTemplate="{DataTemplate pages:ProfileMainPage}" />
+
     <ShellContent
         Title="Food Main Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodMainPage}"
-        Route="foodMainPage" />
+        ContentTemplate="{DataTemplate pages:FoodMainPage}" />
 
     <ShellContent
         Title="Food Add Meal Page"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodAddMealPage}"
-        Route="foodAddMealPage" />
+        ContentTemplate="{DataTemplate pages:FoodAddMealPage}" />
 
     <ShellContent
         Title="Food Portion Details"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}"
-        Route="foodPortionDetailsPage" />
+        ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}" />
 
     <ShellContent
         Title="Food Meal Details"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}"
-        Route="foodMealDetailsPage" />
+        ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}" />
 
 
 

@@ -10,6 +10,7 @@
 
         <!-- Ingredients Button -->
         <Button Text="0"
+                Clicked="NavigateToMealDetails"
                 BackgroundColor="{StaticResource Primary}"
                 TextColor="{StaticResource White}"
                 FontAttributes="Bold"
@@ -40,21 +41,34 @@
                 StrokeShape="RoundRectangle 10"
                 Padding="10">
             <VerticalStackLayout Spacing="10">
-                <!-- Result Item 1 -->
+
+                <!-- Option 1 -->
                 <HorizontalStackLayout>
-                    <CheckBox VerticalOptions="Center" />
-                    <Label Text="Kurczak w panierce"
-                           VerticalOptions="Center"
-                           TextColor="{StaticResource TextPrimary}" />
+                    <CheckBox IsChecked="False"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Start" />
+                    <Button Text="Kurczak w panierce"
+                            Clicked="NavigateToPortionDetails"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
-                <!-- Placeholder for other results -->
-                <Label Text="[Wynik 1]"
-                       TextColor="{StaticResource Gray500}" />
-                <Label Text="[Wynik 2]"
-                       TextColor="{StaticResource Gray500}" />
-                <Label Text="[Wynik 3]"
-                       TextColor="{StaticResource Gray500}" />
+                <!-- Option 2 -->
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="False"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Start" />
+                    <Button Text="Kurczak pierś"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
             </VerticalStackLayout>
         </Border>
 

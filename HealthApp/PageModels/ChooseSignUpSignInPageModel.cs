@@ -1,6 +1,8 @@
-﻿namespace HealthApp.PageModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace HealthApp.PageModels
 {
-    class ChooseSignUpSignInPageModel
+    class ChooseSignUpSignInPageModel : ObservableObject
     {
     }
 }

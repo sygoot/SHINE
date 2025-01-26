@@ -24,46 +24,31 @@
                     StrokeShape="RoundRectangle 10"
                     Padding="20">
                 <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+
                     <!-- Steps Count -->
                     <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                         <Image Source="steps_icon_placeholder.png"
                                WidthRequest="24"
                                HeightRequest="24" />
-                        <Label Text="4200"
+                        <Label Text="{Binding Steps}"
                                FontSize="24"
                                FontAttributes="Bold"
                                TextColor="{StaticResource TextPrimary}" />
                     </HorizontalStackLayout>
 
-                    <!-- Progress Bar Placeholder -->
-                    <Label Text="[Progress Bar Placeholder]"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           TextColor="{StaticResource Gray500}" />
+                    <!-- Fetch Steps Button -->
+                    <Button Text="Fetch Steps"
+                            Command="{Binding FetchStepsCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
 
-                    <!-- Target Label -->
-                    <HorizontalStackLayout HorizontalOptions="Center">
-                        <Label Text="0"
-                               TextColor="{StaticResource TextPrimary}" />
-                        <Label Text="/"
-                               TextColor="{StaticResource TextPrimary}" />
-                        <Label Text="8000"
-                               TextColor="{StaticResource TextPrimary}" />
-                    </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Border>
-
-            <!-- Steps by Time of Day -->
-            <Border BackgroundColor="{StaticResource Gray200}"
-                    StrokeShape="RoundRectangle 10"
-                    Padding="20">
-                <Label Text="[Steps by Time of Day Chart Placeholder]"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       TextColor="{StaticResource Gray500}" />
             </Border>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

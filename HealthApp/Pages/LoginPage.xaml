@@ -42,6 +42,7 @@
 
         <!-- Login Button -->
         <Button Text="Login"
+                Clicked="NavigateToMain"
                 Grid.Row="3"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"

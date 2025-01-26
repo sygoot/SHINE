@@ -17,18 +17,42 @@
                        TextColor="{StaticResource Gray500}" />
             </Border>
 
-            <!-- Days Labels -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                <Label Text="20/5" TextColor="{StaticResource White}" />
-                <Label Text="21/5" TextColor="{StaticResource White}" />
-                <Label Text="22/5" TextColor="{StaticResource White}" />
-                <Label Text="23/5" TextColor="Red" FontAttributes="Bold" />
-                <Label Text="24/5" TextColor="{StaticResource White}" />
-                <Label Text="25/5" TextColor="{StaticResource White}" />
+            <!-- Sleep Time Range -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="{Binding SleepStartTime, StringFormat='{0:HH:mm}'}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource White}" />
+                <Label Text="-"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource White}" />
+                <Label Text="{Binding SleepEndTime, StringFormat='{0:HH:mm}'}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource White}" />
             </HorizontalStackLayout>
+
+            <!-- Sleep Duration -->
+            <Label Text="{Binding SleepDuration, StringFormat='Duration: {0:hh}h {0:mm}m'}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource White}"
+                   HorizontalOptions="Center" />
+
+            <!-- Fetch Data Button -->
+            <Button Text="Fetch Sleep Data"
+                    Command="{Binding FetchSleepCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
 
             <!-- Add Data Button -->
             <Button Text="Add Data"
+                    Clicked="NavigateToAddData"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="{StaticResource White}"
                     FontAttributes="Bold"
@@ -39,56 +63,10 @@
             <!-- Sleep Tips Section -->
             <Border StrokeShape="RoundRectangle 10" Padding="10" BackgroundColor="{StaticResource DarkBackground}">
                 <VerticalStackLayout Spacing="10">
-
                     <Label Text="Sleep Tips"
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}" />
-
-                    <!-- Tip 1 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 1: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
-
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
-
-                    <!-- Tip 2 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 2: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
-
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
-
-                    <!-- Tip 3 -->
-                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource White}" Padding="10">
-                        <Grid ColumnDefinitions="*,50">
-                            <Button Text="Tip 3: Placeholder text for the tip."
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource TextPrimary}"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center" />
-
-                            <CheckBox HorizontalOptions="Center"
-                                      VerticalOptions="Center"
-                                      Grid.Column="1" />
-                        </Grid>
-                    </Border>
                 </VerticalStackLayout>
             </Border>
 

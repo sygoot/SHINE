@@ -1,6 +1,9 @@
-﻿namespace HealthApp.PageModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace HealthApp.PageModels
 {
-    partial class MainPageModel
+    public partial class MainPageModel : ObservableObject
     {
+
     }
 }
