@@ -2,8 +2,7 @@
 {
     public interface IHealthService
     {
-        public Task<int> ExampleAsync();
-        public Task<Dictionary<string, object>> FetchHealthDataAsync(string dataType, string timeRange = "today");
-
+        public Task<int> FetchStepsData(DateTime startingDay, DateTime endingDay);
+        public Task<Models.Sleep> FetchSleepData(DateTime startingDay, DateTime endingDay);
     }
 }

@@ -22,7 +22,7 @@ namespace HealthApp.PageModels
         {
             try
             {
-                var result = await _healthService.ExampleAsync();
+                var result = await _healthService.FetchStepsData(DateTime.Today, DateTime.Now);
 
                 if (result != 0)
                 {

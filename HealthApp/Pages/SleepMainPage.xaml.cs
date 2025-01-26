@@ -2,10 +2,10 @@ namespace HealthApp.Pages;
 
 public partial class SleepMainPage : ContentPage
 {
-    public SleepMainPage()
+    public SleepMainPage(SleepMainPageModel model)
     {
         InitializeComponent();
-        BindingContext = new SleepMainPageModel();
+        BindingContext = model;
     }
     private async void NavigateToAddData(object sender, EventArgs e)
     {
