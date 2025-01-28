@@ -2,7 +2,8 @@
 
 namespace HealthApp.PageModels
 {
-    public class FoodAddMealPageModel : ObservableObject
+    public partial class FoodAddMealPageModel : ObservableObject
     {
+        private readonly FatSecretAPI _fatSecretAPI;
     }
 }

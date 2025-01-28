@@ -2,7 +2,7 @@
 using FatSecretDotNet.RequestObjects;
 
 namespace HealthApp.FatSecretAPI;
-public sealed class FatSecretAPI
+public class FatSecretAPI
 {
     private readonly FatSecretClient clientFatService;
     public FatSecretAPI(FatSecretClient fatSecretClient)
@@ -16,7 +16,6 @@ public sealed class FatSecretAPI
         {
             SearchExpression = food,
             MaxResults = 10,
-
         };
 
         var fatServiceAPIResult = await clientFatService.FoodsSearchAsync(request);
