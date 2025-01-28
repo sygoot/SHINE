@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace HealthApp.PageModels
 {
@@ -13,10 +12,7 @@ namespace HealthApp.PageModels
         public StepsMainPageModel(HealthService healthService)
         {
             _healthService = healthService;
-            FetchStepsCommand = new AsyncRelayCommand(LoadStepsAsync);
         }
-
-        public IAsyncRelayCommand FetchStepsCommand { get; }
 
         public async Task LoadStepsAsync()
         {

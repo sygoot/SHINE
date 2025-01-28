@@ -2,12 +2,9 @@ namespace HealthApp.Pages;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    public LoginPage(LoginPageModel model)
     {
         InitializeComponent();
-    }
-    private async void NavigateToMain(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("main");
+        BindingContext = model;
     }
 }

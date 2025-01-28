@@ -2,9 +2,17 @@ namespace HealthApp.Pages;
 
 public partial class StepsMainPage : ContentPage
 {
-    public StepsMainPage(StepsMainPageModel model)
+    private readonly StepsMainPageModel _viewModel;
+
+    public StepsMainPage(StepsMainPageModel viewModel)
     {
         InitializeComponent();
-        BindingContext = model;
+        BindingContext = _viewModel = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.LoadStepsAsync();
     }
 }

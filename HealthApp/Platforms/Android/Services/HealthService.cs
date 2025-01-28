@@ -18,8 +18,11 @@ namespace HealthApp.Services
     public partial class HealthService : IHealthService
     {
         private readonly ILogger<HealthService> _logger;
+
         private const string PROVIDER_PACKAGE_NAME = "com.samsung.android.shealth";
-        private const string HEALTH_CONNECT_URL = $"market://details?id={PROVIDER_PACKAGE_NAME}&url=healthconnect%3A%2F%2Fonboarding";
+        // Użyj tej samej wartości HEALTH_CONNECT_URL, co w FetchStepsData:
+        private const string HEALTH_CONNECT_URL =
+            $"market://details?id={PROVIDER_PACKAGE_NAME}&url=healthconnect%3A%2F%2Fonboarding";
 
         public HealthService(ILogger<HealthService> logger)
         {
@@ -29,26 +32,51 @@ namespace HealthApp.Services
         public Instant? DateTimeToInstant(DateTime date)
             => Instant.OfEpochSecond(((DateTimeOffset)date).ToUnixTimeSeconds());
 
+        // --------------------------------------------------------
+        // Metoda do kroków (działa jak zawsze):
+        // --------------------------------------------------------
         public async Task<int> FetchStepsData(DateTime startingDay, DateTime endingDay)
         {
             try
             {
-
                 var startOfDay = startingDay;
                 var startTime = DateTimeToInstant(startOfDay);
                 var endTime = DateTimeToInstant(endingDay);
 
-                var stepsRecord = new StepsRecord(startTime!, ZoneOffset.OfHours(2), endTime, ZoneOffset.OfHours(1), 1, new Metadata());
-                var distanceRecord = new DistanceRecord(startTime!, ZoneOffset.OfHours(2), endTime, ZoneOffset.OfHours(1), Length.InvokeMeters(11), new Metadata());
+                var stepsRecord = new StepsRecord(
+                    startTime!,
+                    ZoneOffset.OfHours(2),
+                    endTime,
+                    ZoneOffset.OfHours(1),
+                    1,
+                    new Metadata()
+                );
+                var distanceRecord = new DistanceRecord(
+                    startTime!,
+                    ZoneOffset.OfHours(2),
+                    endTime,
+                    ZoneOffset.OfHours(1),
+                    Length.InvokeMeters(11),
+                    new Metadata()
+                );
 
-                List<string> neededPermissions = [];
-                neededPermissions.Add(HealthPermission.GetReadPermission(Kotlin.Jvm.Internal.Reflection.GetOrCreateKotlinClass(stepsRecord.Class)!));
-                neededPermissions.Add(HealthPermission.GetReadPermission(Kotlin.Jvm.Internal.Reflection.GetOrCreateKotlinClass(distanceRecord.Class)!));
+                List<string> neededPermissions = new List<string>();
+                neededPermissions.Add(
+                    HealthPermission.GetReadPermission(
+                        Kotlin.Jvm.Internal.Reflection.GetOrCreateKotlinClass(stepsRecord.Class)!
+                    )
+                );
+                neededPermissions.Add(
+                    HealthPermission.GetReadPermission(
+                        Kotlin.Jvm.Internal.Reflection.GetOrCreateKotlinClass(distanceRecord.Class)!
+                    )
+                );
 
                 if (Platform.CurrentActivity is not MainActivity activity)
                     throw new InvalidOperationException("Current activity is not MainActivity");
 
-                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
+                var availabilityStatus = HealthConnectClient
+                    .GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
 
                 if (availabilityStatus == HealthConnectClient.SdkUnavailable)
                 {
@@ -57,43 +85,72 @@ namespace HealthApp.Services
 
                 if (availabilityStatus == HealthConnectClient.SdkUnavailableProviderUpdateRequired)
                 {
-                    Platform.CurrentActivity.StartActivity(new Android.Content.Intent(Android.Content.Intent.ActionView, Android.Net.Uri.Parse(HEALTH_CONNECT_URL))
+                    Platform.CurrentActivity.StartActivity(
+                        new Android.Content.Intent(
+                            Android.Content.Intent.ActionView,
+                            Android.Net.Uri.Parse(HEALTH_CONNECT_URL)
+                        )
                         .SetPackage("com.android.vending")
                         .PutExtra("overlay", true)
-                        .PutExtra("callerId", Platform.CurrentActivity.PackageName));
+                        .PutExtra("callerId", Platform.CurrentActivity.PackageName)
+                    );
 
                     throw new InvalidOperationException("Health connect provider update required");
                 }
 
-                if (OperatingSystem.IsAndroidVersionAtLeast(26) && (availabilityStatus == HealthConnectClient.SdkAvailable))
+                if (OperatingSystem.IsAndroidVersionAtLeast(26)
+                    && (availabilityStatus == HealthConnectClient.SdkAvailable))
                 {
-
-                    ICollection<AggregateMetric> metrics = [StepsRecord.CountTotal, DistanceRecord.DistanceTotal];
+                    // 1) Zdefiniuj metryki
+                    ICollection<AggregateMetric> metrics =
+                        new List<AggregateMetric>
+                        {
+                            StepsRecord.CountTotal,
+                            DistanceRecord.DistanceTotal
+                        };
 
                     var dataOriginFilter = new List<DataOrigin>();
 
-                    var request = new AggregateGroupByDurationRequest(metrics, TimeRangeFilter.After(startTime), Duration.OfDays(1), dataOriginFilter);
+                    // 2) Stwórz AggregationRequest
+                    var request = new AggregateGroupByDurationRequest(
+                        metrics,
+                        TimeRangeFilter.After(startTime),
+                        Duration.OfDays(1),
+                        dataOriginFilter
+                    );
 
-                    var healthConnectClientHelper = new HealthConnectClientHelper(HealthConnectClient.GetOrCreate(Android.App.Application.Context));
+                    // 3) Klient + sprawdzenie uprawnień
+                    var healthConnectClientHelper = new HealthConnectClientHelper(
+                        HealthConnectClient.GetOrCreate(Android.App.Application.Context)
+                    );
 
                     var grantedPermissions = await healthConnectClientHelper.GetGrantedPermissions();
                     var missingPermissions = neededPermissions.Except(grantedPermissions).ToList();
 
                     if (missingPermissions.Count > 0)
                     {
-                        grantedPermissions = await SimplePermissionHelper.Request(new HashSet(neededPermissions));
+                        grantedPermissions = await SimplePermissionHelper
+                            .Request(new HashSet(missingPermissions));
                     }
 
-                    var allPermissionsGranted = neededPermissions.All(permission => grantedPermissions.Contains(permission));
+                    var allPermissionsGranted = neededPermissions
+                        .All(permission => grantedPermissions.Contains(permission));
+
                     if (allPermissionsGranted)
                     {
-                        var Result = await healthConnectClientHelper.AggregateGroupByDuration(request);
-                        var StepCountTotal = Result.FirstOrDefault(x => x.Result.Contains(StepsRecord.CountTotal))?.Result.Get(StepsRecord.CountTotal).JavaCast<Java.Lang.Number>();
-                        var DistanceTotal = Result.FirstOrDefault(x => x.Result.Contains(DistanceRecord.DistanceTotal))?.Result.Get(DistanceRecord.DistanceTotal).JavaCast<AndroidX.Health.Connect.Client.Units.Length>();
-                        //new Android.Health.Connect.DataTypes.SleepSessionRecord.Stage().Type
-                        if (StepCountTotal != null)
+                        // 4) Wykonaj aggregator
+                        var result = await healthConnectClientHelper
+                            .AggregateGroupByDuration(request);
+
+                        // 5) Wyciągnij z wyniku
+                        var stepCountTotal = result
+                            .FirstOrDefault(x => x.Result.Contains(StepsRecord.CountTotal))
+                            ?.Result.Get(StepsRecord.CountTotal)
+                            .JavaCast<Java.Lang.Number>();
+
+                        if (stepCountTotal != null)
                         {
-                            var resultSteps = Convert.ToInt32(StepCountTotal);
+                            var resultSteps = Convert.ToInt32(stepCountTotal);
                             return resultSteps;
                         }
                     }
@@ -107,106 +164,149 @@ namespace HealthApp.Services
             return -1;
         }
 
+        // --------------------------------------------------------
+        // Metoda do snu (analogiczny "flow", ale używa ReadRecords):
+        // --------------------------------------------------------
         public async Task<Models.Sleep> FetchSleepData(DateTime startingDay, DateTime endingDay)
         {
-            try
-            {
-                startingDay = startingDay.AddDays(-1).Date.AddHours(20);
-                var startTime = DateTimeToInstant(startingDay);
-                var endTime = DateTimeToInstant(endingDay);
+            //try
+            //{
+            //    // Przykład: zaczynamy od godziny 20:00 poprzedniego dnia
+            //    startingDay = startingDay.AddDays(-1).Date.AddHours(20);
 
-                var sleepRecord = new SleepSessionRecord(startTime!, ZoneOffset.OfHours(2), endTime, ZoneOffset.OfHours(1), "Sleep session", null, new List<SleepSessionRecord.Stage>(), new Metadata());
+            //    var startTime = DateTimeToInstant(startingDay);
+            //    var endTime = DateTimeToInstant(endingDay);
 
-                List<string> neededPermissions = [];
-                neededPermissions.Add(HealthPermission.GetReadPermission(Kotlin.Jvm.Internal.Reflection.GetOrCreateKotlinClass(sleepRecord.Class)!));
+            //    // 1) Tworzymy SleepSessionRecord, by wyciągnąć KClass
+            //    var sleepRecord = new SleepSessionRecord(
+            //        startTime!,
+            //        ZoneOffset.OfHours(2),
+            //        endTime,
+            //        ZoneOffset.OfHours(2),
+            //        "Sleep session",
+            //        null,
+            //        new List<SleepSessionRecord.Stage>(),
+            //        new Metadata()
+            //    );
 
-                foreach (var permission in neededPermissions)
-                {
-                    _logger.LogInformation($"Needed permission: {permission}");
-                }
+            //    var sleepRecordKotlinClass = Kotlin.Jvm.Internal.Reflection
+            //        .GetOrCreateKotlinClass(sleepRecord.Class);
 
-                if (Platform.CurrentActivity is not MainActivity activity)
-                    throw new InvalidOperationException("Current activity is not MainActivity");
+            //    // 2) Uprawnienia do odczytu SleepSessionRecord
+            //    List<string> neededPermissions = new List<string>
+            //    {
+            //        HealthPermission.GetReadPermission(sleepRecordKotlinClass)
+            //    };
 
-                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
+            //    // 3) Sprawdzamy dostępność HealthConnect
+            //    if (Platform.CurrentActivity is not MainActivity activity)
+            //        throw new InvalidOperationException("Current activity is not MainActivity");
 
-                if (availabilityStatus == HealthConnectClient.SdkUnavailable)
-                {
-                    _logger.LogError("Sdk unavailable!");
-                }
+            //    var availabilityStatus = HealthConnectClient
+            //        .GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
 
-                if (availabilityStatus == HealthConnectClient.SdkUnavailableProviderUpdateRequired)
-                {
-                    Platform.CurrentActivity.StartActivity(new Android.Content.Intent(Android.Content.Intent.ActionView, Android.Net.Uri.Parse(HEALTH_CONNECT_URL))
-                        .SetPackage("com.android.vending")
-                        .PutExtra("overlay", true)
-                        .PutExtra("callerId", Platform.CurrentActivity.PackageName));
+            //    if (availabilityStatus == HealthConnectClient.SdkUnavailable)
+            //    {
+            //        _logger.LogError("Sdk unavailable!");
+            //    }
 
-                    throw new InvalidOperationException("Health connect provider update required");
-                }
+            //    if (availabilityStatus == HealthConnectClient.SdkUnavailableProviderUpdateRequired)
+            //    {
+            //        Platform.CurrentActivity.StartActivity(
+            //            new Android.Content.Intent(
+            //                Android.Content.Intent.ActionView,
+            //                Android.Net.Uri.Parse(HEALTH_CONNECT_URL)
+            //            )
+            //            .SetPackage("com.android.vending")
+            //            .PutExtra("overlay", true)
+            //            .PutExtra("callerId", Platform.CurrentActivity.PackageName)
+            //        );
 
-                if (OperatingSystem.IsAndroidVersionAtLeast(26) && (availabilityStatus == HealthConnectClient.SdkAvailable))
-                {
-                    ICollection<AggregateMetric> metrics = new List<AggregateMetric> { SleepSessionRecord.SleepDurationTotal };
-                    var dataOriginFilter = new List<DataOrigin>();
+            //        throw new InvalidOperationException("Health connect provider update required");
+            //    }
 
-                    var request = new AggregateGroupByDurationRequest(metrics, TimeRangeFilter.Between(startTime, endTime), Duration.OfDays(1), dataOriginFilter);
+            //    // 4) Jeśli SDK jest dostępne, przechodzimy do odczytu
+            //    if (OperatingSystem.IsAndroidVersionAtLeast(26)
+            //        && availabilityStatus == HealthConnectClient.SdkAvailable)
+            //    {
+            //        // a) Helper do HealthConnect
+            //        var healthConnectClientHelper = new HealthConnectClientHelper(
+            //            HealthConnectClient.GetOrCreate(Android.App.Application.Context)
+            //        );
 
-                    var healthConnectClientHelper = new HealthConnectClientHelper(HealthConnectClient.GetOrCreate(Android.App.Application.Context));
+            //        // b) Sprawdź uprawnienia
+            //        var grantedPermissions = await healthConnectClientHelper.GetGrantedPermissions();
+            //        var missingPermissions = neededPermissions.Except(grantedPermissions).ToList();
 
-                    var grantedPermissions = await healthConnectClientHelper.GetGrantedPermissions();
+            //        if (missingPermissions.Count > 0)
+            //        {
+            //            grantedPermissions = await SimplePermissionHelper.Request(
+            //                new HashSet(missingPermissions)
+            //            );
+            //        }
 
-                    foreach (var permission in grantedPermissions)
-                    {
-                        _logger.LogInformation($"Granted permission: {permission}");
-                    }
+            //        var allPermissionsGranted = neededPermissions
+            //            .All(permission => grantedPermissions.Contains(permission));
 
-                    var missingPermissions = neededPermissions.Except(grantedPermissions).ToList();
+            //        if (!allPermissionsGranted)
+            //        {
+            //            _logger.LogError(
+            //                "Not all permissions granted. Please check Health Connect settings."
+            //            );
+            //            return null;
+            //        }
 
-                    foreach (var permission in missingPermissions)
-                    {
-                        _logger.LogWarning($"Missing permission: {permission}");
-                    }
+            //        // c) Tworzymy ReadRecordsRequest (bardzo podobnie jak aggregator,
+            //        //    ale tym razem chcemy CAŁE rekordy, żeby mieć startTime / endTime).
+            //        var dataOriginFilter = new List<DataOrigin>();
+            //        var readRequest = new ReadRecordsRequest(
+            //            sleepRecordKotlinClass,               // recordType
+            //            TimeRangeFilter.Between(startTime, endTime),
+            //            dataOriginFilter,
+            //            false,     // ascendingOrder
+            //            1000,      // pageSize
+            //            null       // pageToken
+            //        );
 
-                    if (missingPermissions.Count > 0)
-                    {
-                        foreach (var permission in missingPermissions)
-                        {
-                            _logger.LogError($"Missing permission: {permission}");
-                        }
-                        grantedPermissions = await SimplePermissionHelper.Request(new HashSet(missingPermissions));
-                    }
+            //        // d) Wykonaj odczyt – w Twoim Helperze powinna być metoda 
+            //        //    ReadRecordsAsync<T>(ReadRecordsRequest request).
+            //        //    Jeśli nie ma, musisz ją dodać (proxy do _healthConnectClient).
+            //        var readResponse = await healthConnectClientHelper
 
-                    var allPermissionsGranted = neededPermissions.All(permission => grantedPermissions.Contains(permission));
+            //        // e) Otrzymujesz listę rekordów SleepSessionRecord w tym przedziale.
+            //        //    Możesz wybrać pierwszą sesję, wszystkie itd.
+            //        var firstSleepSession = readResponse.Records.FirstOrDefault();
+            //        if (firstSleepSession != null)
+            //        {
+            //            // f) Mamy start/koniec snu
+            //            var dtStart = firstSleepSession.StartTime.ToDateTime();
+            //            var dtEnd = firstSleepSession.EndTime.ToDateTime();
 
-                    if (!allPermissionsGranted)
-                    {
-                        _logger.LogError("Not all permissions granted. Please check Health Connect settings.");
-                        return null;
-                    }
+            //            // Zmiana strefy w razie potrzeby:
+            //            //   var offsetStart = firstSleepSession.StartZoneOffset?.ToTimeSpan() ?? TimeSpan.Zero;
+            //            //   var offsetEnd   = firstSleepSession.EndZoneOffset?.ToTimeSpan()   ?? TimeSpan.Zero;
 
-                    var result = await healthConnectClientHelper.AggregateGroupByDuration(request);
-                    var sleepData = result.FirstOrDefault(x => x.Result.Contains(SleepSessionRecord.SleepDurationTotal))?.Result.Get(SleepSessionRecord.SleepDurationTotal).JavaCast<SleepSessionRecord>();
+            //            // Czas trwania (jeśli chcesz):
+            //            var duration = dtEnd - dtStart;
 
-                    if (sleepData != null)
-                    {
-                        return new Models.Sleep(
-                            Convert.ToDateTime(sleepData.StartTime),
-                            Convert.ToDateTime(sleepData.StartZoneOffset),
-                            Convert.ToDateTime(sleepData.EndTime),
-                            Convert.ToDateTime(sleepData.EndZoneOffset),
-                            false
-                        );
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error in FetchSleepData");
-            }
+            //            // g) Zwracasz w swoim Models.Sleep
+            //            //    (zakładam konstruktor: Models.Sleep(DateTime start, ..., DateTime end, ..., bool sth))
+            //            return new Models.Sleep(
+            //                dtStart,
+            //                firstSleepSession.StartZoneOffset?.ToTimeSpan() ?? TimeSpan.Zero,
+            //                dtEnd,
+            //                firstSleepSession.EndZoneOffset?.ToTimeSpan() ?? TimeSpan.Zero,
+            //                false
+            //            );
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "Error in FetchSleepData");
+            //}
 
-            return null; // Wartość błędu
+            return null;
         }
-
     }
 }

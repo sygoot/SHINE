@@ -9,11 +9,12 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Weekly Water Intake Overview -->
+            <!-- Weekly Water Intake Chart Placeholder -->
             <Border BackgroundColor="{StaticResource Gray200}"
                     StrokeShape="RoundRectangle 10"
-                    Padding="10">
-                <Label Text="[Weekly Water Intake Placeholder]"
+                    Padding="10"
+                    HeightRequest="150">
+                <Label Text="[Weekly Water Intake Chart Placeholder]"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        TextColor="{StaticResource Gray500}" />
@@ -23,7 +24,8 @@
             <Border BackgroundColor="{StaticResource Gray200}"
                     StrokeShape="RoundRectangle 10"
                     Padding="20">
-                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                      ColumnDefinitions="*,Auto">
 
                     <!-- Water Glass Icon -->
                     <Image Source="glass_placeholder.png"
@@ -33,27 +35,56 @@
                            HeightRequest="150"
                            WidthRequest="150" />
 
-                    <!-- Target Label -->
-                    <Label Text="Target: 3000mL"
+                    <!-- Dzisiejsze spożycie wody -->
+                    <Label Text="{Binding TodaysWaterIntake, StringFormat='Dzisiaj: {0} mL'}"
+                           Grid.Row="1" Grid.Column="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource TextPrimary}"
+                           FontAttributes="Bold"
+                           FontSize="Medium" />
+
+                    <!-- Cel dzienny -->
+                    <Label Text="Cel dzienny: 3000 mL"
                            Grid.Row="1" Grid.Column="1"
                            HorizontalOptions="End"
                            VerticalOptions="Center"
                            TextColor="{StaticResource TextPrimary}" />
 
-                    <!-- Add Water Buttons -->
-                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="10" HorizontalOptions="Center">
+                    <!-- Pasek postępu -->
+                    <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                 Progress="{Binding DailyProgress}"
+                                 HeightRequest="10"
+                                 VerticalOptions="Center"
+                                 Margin="0,10,0,0"
+                                 BackgroundColor="{StaticResource Gray300}"
+                                 ProgressColor="{StaticResource Primary}" />
+
+                    <!-- Przykładowe przyciski dodawania wody -->
+                    <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Spacing="10" HorizontalOptions="Center"
+                                           Margin="0,10,0,0">
                         <Button Text="100"
+                                Command="{Binding AddWaterCommand}"
+                                CommandParameter="100"
                                 BackgroundColor="{StaticResource Primary}"
                                 TextColor="{StaticResource White}"
-                                WidthRequest="50" HeightRequest="50" />
+                                WidthRequest="70"
+                                HeightRequest="50" />
                         <Button Text="250"
+                                Command="{Binding AddWaterCommand}"
+                                CommandParameter="250"
                                 BackgroundColor="{StaticResource Primary}"
                                 TextColor="{StaticResource White}"
-                                WidthRequest="50" HeightRequest="50" />
+                                WidthRequest="70"
+                                HeightRequest="50" />
                         <Button Text="500"
+                                Command="{Binding AddWaterCommand}"
+                                CommandParameter="500"
                                 BackgroundColor="{StaticResource Primary}"
                                 TextColor="{StaticResource White}"
-                                WidthRequest="50" HeightRequest="50" />
+                                WidthRequest="70"
+                                HeightRequest="50" />
                     </HorizontalStackLayout>
 
                 </Grid>
@@ -71,5 +102,4 @@
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
