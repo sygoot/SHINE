@@ -14,6 +14,9 @@ namespace Models
         long? Id = null
     ) : Entity(Id)
     {
+        // Domyślna inicjalizacja listy składników, aby zapobiec null
+        public List<Ingredient> Ingredients { get; set; } = Ingredients ?? new List<Ingredient>();
+
         /// <summary>
         /// Aktualizuje wartości odżywcze na podstawie listy składników
         /// </summary>
@@ -21,6 +24,7 @@ namespace Models
         {
             return this with
             {
+                Ingredients = Ingredients.ToList(), // Zapewniamy, że kopia listy jest przekazywana poprawnie
                 Calories = Ingredients.Sum(i => i.Calories),
                 Protein = Ingredients.Sum(i => i.Protein),
                 Carbohydrate = Ingredients.Sum(i => i.Carbohydrate),

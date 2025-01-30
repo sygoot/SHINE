@@ -81,12 +81,20 @@ namespace HealthApp.PageModels
                 Fat: CalculatedFat
             );
 
+            // Upewniamy się, że lista składników nie jest null
+            if (CurrentMeal.Ingredients == null)
+            {
+                CurrentMeal.Ingredients = new List<Ingredient>();
+            }
+
             CurrentMeal.Ingredients.Add(ingredient);
 
+            // Aktualizacja wartości makro dla posiłku
             CurrentMeal = CurrentMeal.UpdateNutritionalValues();
 
             await Shell.Current.GoToAsync("..");
         }
+
 
     }
 }
