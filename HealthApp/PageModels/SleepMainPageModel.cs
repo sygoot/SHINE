@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 
 namespace HealthApp.PageModels
 {
     public partial class SleepMainPageModel : ObservableObject
     {
         private readonly HealthService _healthService;
+        private readonly ILogger<SleepMainPageModel> _logger;
 
         [ObservableProperty]
         private DateTime _sleepStartTime;
@@ -16,9 +18,10 @@ namespace HealthApp.PageModels
         [ObservableProperty]
         private TimeSpan _sleepDuration;
 
-        public SleepMainPageModel(HealthService healthService)
+        public SleepMainPageModel(HealthService healthService, ILogger<SleepMainPageModel> logger)
         {
             _healthService = healthService;
+            _logger = logger;
             FetchSleepCommand = new AsyncRelayCommand(LoadSleepAsync);
         }
 
@@ -33,10 +36,11 @@ namespace HealthApp.PageModels
 
                 var sleepData = await _healthService.FetchSleepData(startingDay, endingDay);
 
-                if (sleepData != null)
+                var firstSleep = sleepData.FirstOrDefault();
+                if (firstSleep != null)
                 {
-                    SleepStartTime = sleepData.StartTime;
-                    SleepEndTime = sleepData.EndTime;
+                    SleepStartTime = firstSleep.StartTime;
+                    SleepEndTime = firstSleep.EndTime;
                     SleepDuration = SleepEndTime - SleepStartTime;
                 }
                 else
@@ -48,6 +52,7 @@ namespace HealthApp.PageModels
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error when load sleep");
                 SleepStartTime = DateTime.MinValue;
                 SleepEndTime = DateTime.MinValue;
                 SleepDuration = TimeSpan.Zero;

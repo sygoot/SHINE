@@ -29,6 +29,13 @@ namespace HealthApp.Services
         public Instant? DateTimeToInstant(DateTime date)
             => Instant.OfEpochSecond(((DateTimeOffset)date).ToUnixTimeSeconds());
 
+        public static DateTime InstantToDateTime(Instant instant)
+        {
+            long epochMilli = instant.ToEpochMilli();
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(epochMilli);
+            return dateTimeOffset.UtcDateTime;
+        }
+
         public async Task<int> FetchStepsData(DateTime startingDay, DateTime endingDay)
         {
             try
@@ -107,7 +114,7 @@ namespace HealthApp.Services
             return -1;
         }
 
-        public async Task<Models.Sleep> FetchSleepData(DateTime startingDay, DateTime endingDay)
+        public async Task<List<Models.Sleep>> FetchSleepData(DateTime startingDay, DateTime endingDay)
         {
             try
             {
@@ -128,7 +135,7 @@ namespace HealthApp.Services
                 if (Platform.CurrentActivity is not MainActivity activity)
                     throw new InvalidOperationException("Current activity is not MainActivity");
 
-                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
+                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, "com.google.android.apps.healthdata");
 
                 if (availabilityStatus == HealthConnectClient.SdkUnavailable)
                 {
@@ -147,11 +154,6 @@ namespace HealthApp.Services
 
                 if (OperatingSystem.IsAndroidVersionAtLeast(26) && (availabilityStatus == HealthConnectClient.SdkAvailable))
                 {
-                    ICollection<AggregateMetric> metrics = new List<AggregateMetric> { SleepSessionRecord.SleepDurationTotal };
-                    var dataOriginFilter = new List<DataOrigin>();
-
-                    var request = new AggregateGroupByDurationRequest(metrics, TimeRangeFilter.Between(startTime, endTime), Duration.OfDays(1), dataOriginFilter);
-
                     var healthConnectClientHelper = new HealthConnectClientHelper(HealthConnectClient.GetOrCreate(Android.App.Application.Context));
 
                     var grantedPermissions = await healthConnectClientHelper.GetGrantedPermissions();
@@ -182,21 +184,22 @@ namespace HealthApp.Services
                     if (!allPermissionsGranted)
                     {
                         _logger.LogError("Not all permissions granted. Please check Health Connect settings.");
-                        return null;
+                        return [];
                     }
 
-                    var result = await healthConnectClientHelper.AggregateGroupByDuration(request);
-                    var sleepData = result.FirstOrDefault(x => x.Result.Contains(SleepSessionRecord.SleepDurationTotal))?.Result.Get(SleepSessionRecord.SleepDurationTotal).JavaCast<SleepSessionRecord>();
+                    var sleepData = await healthConnectClientHelper.ReadSleepSessions(sleepRecord, startTime, endTime);
 
-                    if (sleepData != null)
+                    if (sleepData != null && sleepData.Count > 0)
                     {
-                        return new Models.Sleep(
-                            Convert.ToDateTime(sleepData.StartTime),
-                            Convert.ToDateTime(sleepData.StartZoneOffset),
-                            Convert.ToDateTime(sleepData.EndTime),
-                            Convert.ToDateTime(sleepData.EndZoneOffset),
-                            false
-                        );
+                        return sleepData
+                            .Select(singleSleep => new Models.Sleep(
+                                InstantToDateTime(singleSleep.StartTime),
+                                Convert.ToDateTime(singleSleep.StartZoneOffset),
+                                Convert.ToDateTime(singleSleep.EndTime),
+                                Convert.ToDateTime(singleSleep.EndZoneOffset),
+                                false
+                            ))
+                            .ToList();
                     }
                 }
             }
@@ -205,7 +208,7 @@ namespace HealthApp.Services
                 _logger.LogError(ex, "Error in FetchSleepData");
             }
 
-            return null; // Wartość błędu
+            return []; // Wartość błędu
         }
 
     }
