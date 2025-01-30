@@ -135,7 +135,7 @@ namespace HealthApp.Services
                 if (Platform.CurrentActivity is not MainActivity activity)
                     throw new InvalidOperationException("Current activity is not MainActivity");
 
-                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, "com.google.android.apps.healthdata");
+                var availabilityStatus = HealthConnectClient.GetSdkStatus(Platform.CurrentActivity, PROVIDER_PACKAGE_NAME);
 
                 if (availabilityStatus == HealthConnectClient.SdkUnavailable)
                 {
@@ -194,9 +194,9 @@ namespace HealthApp.Services
                         return sleepData
                             .Select(singleSleep => new Models.Sleep(
                                 InstantToDateTime(singleSleep.StartTime),
-                                Convert.ToDateTime(singleSleep.StartZoneOffset),
-                                Convert.ToDateTime(singleSleep.EndTime),
-                                Convert.ToDateTime(singleSleep.EndZoneOffset),
+                                null,
+                                InstantToDateTime(singleSleep.EndTime),
+                                null,
                                 false
                             ))
                             .ToList();
