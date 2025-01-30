@@ -27,24 +27,18 @@
 
                     <!-- Steps Count -->
                     <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                        <Image Source="steps_icon_placeholder.png"
+                        <Image Source="shoes.png"
                                WidthRequest="24"
                                HeightRequest="24" />
+                        <Label Text="Steps Today:"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}" />                        
                         <Label Text="{Binding Steps}"
                                FontSize="24"
                                FontAttributes="Bold"
                                TextColor="{StaticResource TextPrimary}" />
                     </HorizontalStackLayout>
-
-                    <!-- Fetch Steps Button -->
-                    <Button Text="Fetch Steps"
-                            Command="{Binding FetchStepsCommand}"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="{StaticResource White}"
-                            FontAttributes="Bold"
-                            CornerRadius="10"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
 
                 </VerticalStackLayout>
             </Border>

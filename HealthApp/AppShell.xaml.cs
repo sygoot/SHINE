@@ -10,6 +10,8 @@ namespace HealthApp
         {
             InitializeComponent();
             var currentTheme = Application.Current!.UserAppTheme;
+            Routing.RegisterRoute(nameof(FoodPortionDetailsPage), typeof(FoodPortionDetailsPage));
+            Routing.RegisterRoute(nameof(FoodMealDetailsPage), typeof(FoodMealDetailsPage));
             ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
         }
         public static async Task DisplaySnackbarAsync(string message)

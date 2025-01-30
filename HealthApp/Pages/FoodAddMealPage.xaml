@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:HealthApp.PageModels"
              x:Class="HealthApp.Pages.FoodAddMealPage"
              Title="Obiad"
              BackgroundColor="{StaticResource PrimaryDark}">
 
     <VerticalStackLayout Padding="20" Spacing="20">
 
-        <!-- Ingredients Button -->
-        <Button Text="0"
+        <!-- Guzik pokazujący liczbę produktów w posiłku (IngredientCount) -->
+        <Button Text="{Binding IngredientCount}"
                 Clicked="NavigateToMealDetails"
                 BackgroundColor="{StaticResource Primary}"
                 TextColor="{StaticResource White}"
@@ -20,58 +20,36 @@
                 WidthRequest="50"
                 HeightRequest="50" />
 
-        <!-- Search Bar -->
-        <Border BackgroundColor="{StaticResource Gray200}"
-                StrokeShape="RoundRectangle 10"
-                Padding="10">
-            <HorizontalStackLayout>
-                <Entry Placeholder="Wpisz nazwę produktu"
-                       TextColor="{StaticResource TextPrimary}"
-                       BackgroundColor="Transparent"
-                       HorizontalOptions="FillAndExpand" />
-                <Button Text="&#x1F50D;"
-                        FontSize="18"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource TextPrimary}" />
-            </HorizontalStackLayout>
-        </Border>
+        <!-- Wyszukiwarka -->
+        <SearchBar x:Name="FoodSearchBar"
+                   Placeholder="Wpisz nazwę produktu..."
+                   Text="{Binding SearchQuery}"
+                   BackgroundColor="White"
+                   TextColor="Black"
+                   SearchButtonPressed="FoodSearchBar_SearchButtonPressed"/>
 
-        <!-- Search Results -->
-        <Border BackgroundColor="{StaticResource Gray200}"
-                StrokeShape="RoundRectangle 10"
-                Padding="10">
-            <VerticalStackLayout Spacing="10">
+        <!-- Lista wyników wyszukiwania, z tapem prowadzącym do FoodPortionDetailsPage -->
+        <CollectionView ItemsSource="{Binding SearchResults}"
+                        SelectionMode="None">
 
-                <!-- Option 1 -->
-                <HorizontalStackLayout>
-                    <CheckBox IsChecked="False"
-                              VerticalOptions="Center"
-                              HorizontalOptions="Start" />
-                    <Button Text="Kurczak w panierce"
-                            Clicked="NavigateToPortionDetails"
-                            FontAttributes="Bold"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource TextPrimary}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center" />
-                </HorizontalStackLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="8" Spacing="4">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodAddMealPageModel}}, Path=SelectFoodCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </StackLayout.GestureRecognizers>
 
-                <!-- Option 2 -->
-                <HorizontalStackLayout>
-                    <CheckBox IsChecked="False"
-                              VerticalOptions="Center"
-                              HorizontalOptions="Start" />
-                    <Button Text="Kurczak pierś"
-                            FontAttributes="Bold"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource TextPrimary}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
-            </VerticalStackLayout>
-        </Border>
+                        <Label Text="{Binding Name}"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource White}" />
+                        <Label Text="{Binding Serving.ServingDescription}"
+                               TextColor="{StaticResource White}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
-
 </ContentPage>

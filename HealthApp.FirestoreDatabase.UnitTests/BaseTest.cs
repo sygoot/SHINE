@@ -22,8 +22,8 @@ namespace HealthApp.FirestoreDatabase.UnitTests
         }
         protected async Task LoginUserAsync()
         {
-            var testUserEmail = "test@test.com";
-            var testUserPassword = "test_test";
+            var testUserEmail = "zbychu@gmail.com";
+            var testUserPassword = "zbychu";
             var firestoreService = Container.ServiceProvider.GetService<FirebaseAuthClient>();
 
             Assert.NotNull(firestoreService);

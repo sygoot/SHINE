@@ -6,66 +6,105 @@
              Title="Register"
              BackgroundColor="{StaticResource PrimaryDark}">
 
-    <Grid Padding="30" RowSpacing="20" VerticalOptions="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            <!-- Logo -->
+            <Image Source="Resources/Images/logo.svg"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="100"
+                   HeightRequest="100" />
 
-        <!-- Logo -->
-        <Image Source="Resources/Images/logo.svg"
-               Grid.Row="0"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               WidthRequest="100"
-               HeightRequest="100" />
+            <!-- First Name Entry -->
+            <Entry Placeholder="First Name"
+                   Text="{Binding FirstName}"
+                   Completed="FirstNameCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
 
-        <!-- Username Entry -->
-        <Entry Placeholder="Username"
-               Grid.Row="1"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}" />
+            <!-- Last Name Entry -->
+            <Entry Placeholder="Last Name"
+                   x:Name="LastNameEntry"
+                   Text="{Binding LastName}"
+                   Completed="LastNameCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
 
-        <!-- Email Entry -->
-        <Entry Placeholder="Email"
-               Grid.Row="2"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}" />
+            <!-- Username Entry -->
+            <Entry Placeholder="Username"
+                   x:Name="UsernameEntry"
+                   Text="{Binding Username}"
+                   Completed="UsernameCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
 
-        <!-- Password Entry -->
-        <Entry Placeholder="Password"
-               Grid.Row="3"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}"
-               IsPassword="True" />
+            <!-- Email Entry -->
+            <Entry Placeholder="Email"
+                   x:Name="EmailEntry"
+                   Text="{Binding Email}"
+                   Keyboard="Email"
+                   Completed="EmailCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
 
-        <!-- Confirm Password Entry -->
-        <Entry Placeholder="Confirm Password"
-               Grid.Row="4"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}"
-               IsPassword="True" />
+            <!-- Password Entry -->
+            <Entry Placeholder="Password"
+                   x:Name="PasswordEntry"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   Completed="PasswordCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
 
-        <!-- Register Button -->
-        <Button Text="Register"
-                Clicked="NavigateToRegisterConfirmation"
-                Grid.Row="5"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="200"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="{StaticResource White}" />
-    </Grid>
+            <!-- Confirm Password Entry -->
+            <Entry Placeholder="Confirm Password"
+                   x:Name="ConfirmPasswordEntry"
+                   Text="{Binding ConfirmPassword}"
+                   IsPassword="True"
+                   Completed="ConfirmPasswordCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Gender Picker -->
+            <Picker Title="Select Gender"
+                    x:Name="GenderPicker"
+                    ItemsSource="{Binding Genders}"
+                    SelectedItem="{Binding SelectedGender}"
+                    BackgroundColor="{StaticResource White}"
+                    TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Height Entry -->
+            <Entry Placeholder="Height (cm)"
+                   x:Name="HeightEntry"
+                   Text="{Binding Height}"
+                   Keyboard="Numeric"
+                   Completed="HeightCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Weight Entry -->
+            <Entry Placeholder="Weight (kg)"
+                   x:Name="WeightEntry"
+                   Text="{Binding Weight}"
+                   Keyboard="Numeric"
+                   Completed="WeightCompleted"
+                   BackgroundColor="{StaticResource White}"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Date of Birth DatePicker -->
+            <DatePicker Date="{Binding DateOfBirth}"
+                        x:Name="DatePicker"
+                        Format="dd/MM/yyyy"
+                        BackgroundColor="{StaticResource White}"
+                        TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Register Button -->
+            <Button Text="Register"
+                    Command="{Binding RegisterCommand}"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

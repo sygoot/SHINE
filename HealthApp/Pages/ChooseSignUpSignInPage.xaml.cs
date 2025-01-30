@@ -2,9 +2,10 @@ namespace HealthApp.Pages;
 
 public partial class ChooseSignUpSignInPage : ContentPage
 {
-    public ChooseSignUpSignInPage()
+    public ChooseSignUpSignInPage(ChooseSignUpSignInPageModel model)
     {
         InitializeComponent();
+        BindingContext = model;
     }
 
     private async void NavigateToLogin(object sender, EventArgs e)
