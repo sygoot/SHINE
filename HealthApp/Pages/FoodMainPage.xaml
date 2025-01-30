@@ -1,78 +1,131 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.FoodMainPage"
              Title="Jedzenie"
              BackgroundColor="{StaticResource PrimaryDark}">
 
-    <Grid RowDefinitions="*,Auto" Padding="20">
+    <Grid RowDefinitions="*,Auto" Padding="20" RowSpacing="20">
 
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="20" Spacing="20">
+            <VerticalStackLayout Spacing="25" Padding="10">
 
-                <!-- Weekly Calorie Intake Overview -->
-                <Border BackgroundColor="{StaticResource Gray200}"
-                        StrokeShape="RoundRectangle 10"
-                        Padding="10">
-                    <Label Text="[Weekly Calorie Intake Placeholder]"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           TextColor="{StaticResource Gray500}" />
-                </Border>
+                <!-- Calorie Progress Section -->
+                <Frame CornerRadius="15"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <!-- Goal -->
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{StaticResource Primary}"
+                               Padding="15"
+                               HorizontalOptions="Center">
+                            <Label Text="Cel: 2500 kcal"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource White}"
+                                   HorizontalOptions="Center"/>
+                        </Frame>
 
-                <!-- Calorie Target and Current Progress -->
-                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <!-- Progress Visualization -->
+                        <BoxView Color="{StaticResource Primary}"
+                                 HeightRequest="5"
+                                 HorizontalOptions="Fill"/>
 
-                    <!-- Calorie Target Button -->
-                    <Button Text="Cel: 2500 kcal"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="{StaticResource White}"
-                            FontAttributes="Bold"
-                            CornerRadius="10"
-                            HorizontalOptions="Center" />
+                        <!-- Current Progress -->
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{StaticResource Gray800}"
+                               Padding="15"
+                               HorizontalOptions="Center">
+                            <Label Text="Aktualnie: 1200 kcal"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource White}"
+                                   HorizontalOptions="Center"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-                    <!-- Heart Representation -->
-                    <Image Source="heart_placeholder.png"
-                           WidthRequest="150"
-                           HeightRequest="150"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
+                <!-- Weekly Summary -->
+                <Frame CornerRadius="15"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Tygodniowe podsumowanie"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource White}"
+                               HorizontalOptions="Center"/>
 
-                    <!-- Current Calorie Count -->
-                    <Label Text="1200 kcal"
-                           FontSize="24"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           TextColor="{StaticResource White}" />
-                </VerticalStackLayout>
+                        <!-- Placeholder for chart -->
+                        <BoxView HeightRequest="150"
+                                 BackgroundColor="{StaticResource Gray800}"
+                                 CornerRadius="10"/>
+                    </VerticalStackLayout>
+                </Frame>
 
                 <!-- Nutritional Summary -->
-                <Border BackgroundColor="{StaticResource Gray200}"
-                        StrokeShape="RoundRectangle 10"
-                        Padding="10">
-                    <Label Text="Podsumowanie składników odżywczych"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           TextColor="{StaticResource TextPrimary}" />
-                </Border>
+                <Frame CornerRadius="15"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Składniki odżywcze"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource White}"
+                               HorizontalOptions="Center"/>
+
+                        <Grid ColumnDefinitions="*,*,*" 
+                              RowDefinitions="Auto,Auto"
+                              Padding="10">
+                            <Label Text="Białko"
+                                   Grid.Column="0"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource White}"/>
+                            <Label Text="Węglowodany"
+                                   Grid.Column="1"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource White}"/>
+                            <Label Text="Tłuszcze"
+                                   Grid.Column="2"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource White}"/>
+
+                            <Label Text="{Binding TotalProtein, StringFormat='{}{0} g'}"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource Primary}"/>
+                            <Label Text="{Binding TotalCarbs, StringFormat='{}{0} g'}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource Primary}"/>
+                            <Label Text="{Binding TotalFat, StringFormat='{}{0} g'}"
+                                   Grid.Row="1"
+                                   Grid.Column="2"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource Primary}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Bar -->
-        <Grid Grid.Row="1" BackgroundColor="{StaticResource Gray200}" Padding="10">
-            <Button Text="Dodaj posiłek"
-                    Clicked="NavigateToAddMeal"
-                    BackgroundColor="{StaticResource Primary}"
-                    TextColor="{StaticResource White}"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center" />
-        </Grid>
+        <!-- Add Meal Button -->
+        <Button Grid.Row="1"
+                Text="DODAJ POSIŁEK"
+                Clicked="NavigateToAddMeal"
+                CornerRadius="15"
+                HeightRequest="60"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="{StaticResource White}"
+                Margin="0,10"/>
 
     </Grid>
 

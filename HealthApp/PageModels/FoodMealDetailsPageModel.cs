@@ -15,12 +15,13 @@ namespace HealthApp.PageModels
         public FoodMealDetailsPageModel(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
+            Ingredients = new ObservableCollection<Ingredient>();
         }
 
         [ObservableProperty]
         private Meal _currentMeal;
 
-        public ObservableCollection<Ingredient> Ingredients { get; private set; } = new();
+        public ObservableCollection<Ingredient> Ingredients { get; private set; }
 
         [RelayCommand]
         private async Task SaveMealAsync()
@@ -29,12 +30,20 @@ namespace HealthApp.PageModels
             {
                 if (CurrentMeal != null)
                 {
-                    // Jeśli posiłek już istnieje w bazie (ma ID) - aktualizuj
+                    foreach (var ingredient in CurrentMeal.Ingredients)
+                    {
+                        CurrentMeal = CurrentMeal with
+                        {
+                            Carbohydrate = CurrentMeal.Carbohydrate + ingredient.Carbohydrate,
+                            Calories = CurrentMeal.Calories + ingredient.Calories,
+                            Fat = CurrentMeal.Fat + ingredient.Fat,
+                            Protein = CurrentMeal.Protein + ingredient.Protein
+                        };
+                    }
                     if (CurrentMeal.Id > 0)
                     {
                         await _databaseService.MealTable.Update(CurrentMeal);
                     }
-                    // Jeśli to nowy posiłek - dodaj do bazy
                     else
                     {
                         await _databaseService.MealTable.Add(CurrentMeal);
@@ -51,16 +60,24 @@ namespace HealthApp.PageModels
 
         partial void OnCurrentMealChanged(Meal value)
         {
-            if (value?.Ingredients != null)
+            if (value != null)
             {
-                Ingredients = new ObservableCollection<Ingredient>(value.Ingredients);
-                OnPropertyChanged(nameof(Ingredients));
-            }
+                // Zapewniamy, że Ingredients nie jest null
+                Ingredients.Clear();
+                if (value.Ingredients != null)
+                {
+                    foreach (var ingredient in value.Ingredients)
+                    {
+                        Ingredients.Add(ingredient);
+                    }
+                }
 
-            OnPropertyChanged(nameof(TotalCalories));
-            OnPropertyChanged(nameof(TotalProtein));
-            OnPropertyChanged(nameof(TotalCarbs));
-            OnPropertyChanged(nameof(TotalFat));
+                // Aktualizujemy sumaryczne makroskładniki
+                OnPropertyChanged(nameof(TotalCalories));
+                OnPropertyChanged(nameof(TotalProtein));
+                OnPropertyChanged(nameof(TotalCarbs));
+                OnPropertyChanged(nameof(TotalFat));
+            }
         }
 
         public double TotalCalories => Ingredients.Sum(i => i.Calories);
