@@ -11,7 +11,7 @@ public class CostamTest : BaseTest
     public void Test1()
     {
         Logger.WriteLine("Test1");
-        var costam2 = Container.Provider.GetRequiredService<FatSecretAPI>();
+        var costam2 = Container.Provider.GetRequiredService<FatSecretAPIClass>();
         costam2.GetFood("chicken");
         Assert.True(true);
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.FoodPortionDetailsPage"
              Title="Rozmiar Porcji"
              BackgroundColor="{StaticResource PrimaryDark}">
@@ -14,13 +13,14 @@
                 Padding="10">
             <VerticalStackLayout Spacing="10">
 
-                <!-- Food Name and Favorite Icon -->
+                <!-- Food Name and "Favorite" icon -->
                 <Grid ColumnDefinitions="*,Auto">
-                    <Label Text="Ziemniak z kartoflem"
+                    <Label Text="{Binding SelectedFood.Name}"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}"
                            VerticalOptions="Center"
                            HorizontalOptions="Start" />
+
                     <Button Text="&#x2606;"
                             FontSize="18"
                             BackgroundColor="Transparent"
@@ -30,38 +30,45 @@
                 </Grid>
 
                 <!-- Portion Size Adjustment -->
-                <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto,Auto">
-                    <Label Text="100g"
+                <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto,Auto" Margin="0,10,0,0">
+                    <Label Text="{Binding CurrentPortionInGrams, StringFormat='{0} g'}"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}"
                            VerticalOptions="Center"
                            HorizontalOptions="Center" />
 
                     <Button Text="-"
+                            Grid.Column="1"
+                            Command="{Binding DecreasePortionCommand}"
                             BackgroundColor="{StaticResource Primary}"
                             TextColor="{StaticResource White}"
                             CornerRadius="10"
                             VerticalOptions="Center"
-                            HorizontalOptions="End" />
+                            HorizontalOptions="End"
+                            WidthRequest="40" />
 
                     <Button Text="+"
+                            Grid.Column="2"
+                            Command="{Binding IncreasePortionCommand}"
                             BackgroundColor="{StaticResource Primary}"
                             TextColor="{StaticResource White}"
                             CornerRadius="10"
                             VerticalOptions="Center"
-                            HorizontalOptions="Start" />
+                            HorizontalOptions="Start"
+                            WidthRequest="40" />
                 </Grid>
 
-                <!-- Confirm Portion Button -->
-                <Button Text="OK"
-                        Clicked="NavigateToAddMeal"
+                <!-- Confirm Portion Button (Add Ingredient) -->
+                <Button Text="Add Ingredient"
+                        Command="{Binding AddIngredientCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="{StaticResource White}"
                         FontAttributes="Bold"
                         CornerRadius="10"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        WidthRequest="100" />
+                        WidthRequest="140"
+                        Margin="0,10,0,0" />
 
             </VerticalStackLayout>
         </Border>
@@ -71,18 +78,18 @@
                 StrokeShape="RoundRectangle 10"
                 Padding="10">
             <VerticalStackLayout Spacing="10">
-                <Label Text="Makroskładniki odżywcze (100g)"
+                <Label Text="Makroskładniki odżywcze"
                        FontAttributes="Bold"
                        TextColor="{StaticResource TextPrimary}"
                        HorizontalOptions="Center" />
 
-                <Label Text="Białka: 2g"
+                <Label Text="{Binding CalculatedCalories, StringFormat='Kalorie: {0:F0}'}"
                        TextColor="{StaticResource TextPrimary}" />
-                <Label Text="Węglowodany: 20g"
+                <Label Text="{Binding CalculatedProtein, StringFormat='Białko: {0:F1} g'}"
                        TextColor="{StaticResource TextPrimary}" />
-                <Label Text="Tłuszcze: 0g"
+                <Label Text="{Binding CalculatedCarbohydrate, StringFormat='Węglowodany: {0:F1} g'}"
                        TextColor="{StaticResource TextPrimary}" />
-                <Label Text="Kalorie: 90kcal"
+                <Label Text="{Binding CalculatedFat, StringFormat='Tłuszcze: {0:F1} g'}"
                        TextColor="{StaticResource TextPrimary}" />
             </VerticalStackLayout>
         </Border>
