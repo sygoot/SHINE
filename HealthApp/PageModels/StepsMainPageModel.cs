@@ -14,7 +14,7 @@ namespace HealthApp.PageModels
             _healthService = healthService;
         }
 
-        public async Task LoadStepsAsync()
+        public async Task<int> LoadStepsAsync()
         {
             try
             {
@@ -28,11 +28,14 @@ namespace HealthApp.PageModels
                 {
                     Steps = 0; // Default if no data is found
                 }
+
+                return Steps; // Zwróć liczbę kroków
             }
             catch (Exception ex)
             {
                 // Log or handle the exception
                 Steps = 0; // Reset in case of error
+                return 0; // Zwróć 0 w przypadku błędu
             }
         }
     }

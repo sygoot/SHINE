@@ -1,79 +1,103 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="HealthApp.Pages.FoodMealDetailsPage"
-             Title="Obiad"
-             BackgroundColor="{StaticResource PrimaryDark}">
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HealthApp.PageModels"
+    xmlns:models="clr-namespace:Models;assembly=Models"
+    x:Class="HealthApp.Pages.FoodMealDetailsPage"
+    Title="Obiad"
+    BackgroundColor="{StaticResource PrimaryDark}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Title -->
-            <Label Text="Lista"
-                   FontAttributes="Bold"
-                   FontSize="24"
-                   TextColor="{StaticResource White}"
-                   HorizontalOptions="Start" />
+        <Label Text="Twój posiłek"
+               FontAttributes="Bold"
+               FontSize="24"
+               TextColor="{StaticResource White}"
+               HorizontalOptions="Center" />
 
-            <!-- Meal Details Table -->
-            <Border BackgroundColor="{StaticResource Gray200}"
-                    StrokeShape="RoundRectangle 10"
-                    Padding="10">
-                <VerticalStackLayout Spacing="10">
+        <CollectionView ItemsSource="{Binding Ingredients}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="{StaticResource Gray900}" Padding="10" CornerRadius="10">
+                        <VerticalStackLayout Spacing="5">
 
-                    <!-- Table Header -->
-                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowDefinitions="Auto">
-                        <Label Text="#" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
-                        <Label Text="Nazwa" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
-                        <Label Text="Ilość" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
-                        <Label Text="B" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
-                        <Label Text="W" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
-                        <Label Text="kcal" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
-                    </Grid>
+                            <!-- Nazwa składnika -->
+                            <Label Text="{Binding Name}" 
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="Center"
+                                   Margin="0,0,0,5" />
 
-                    <!-- First Ingredient Row -->
-                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
-                        <Label Text="1" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
-                        <Label Text="Kurczak" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
-                        <Label Text="100g" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
-                        <Label Text="20g" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
-                        <Label Text="1g" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
-                        <Label Text="150" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
-                        <HorizontalStackLayout Grid.Column="5" HorizontalOptions="End">
-                            <Button Text="✎" FontSize="12" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
-                            <Button Text="❌" FontSize="12" BackgroundColor="Transparent" TextColor="Red" />
-                        </HorizontalStackLayout>
-                    </Grid>
+                            <!-- Pierwsza linia: Ilość + Kalorie -->
+                            <Label Text="{Binding Grams, StringFormat='Ilość: {0} g'}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Start" />
+                            <Label Text="{Binding Calories, StringFormat='Kalorie: {0:F0} kcal'}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Start"
+                                   Margin="0,2,0,0"/>
 
-                    <!-- Second Ingredient Row -->
-                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
-                        <Label Text="2" TextColor="{StaticResource TextPrimary}" Grid.Column="0" />
-                        <Label Text="Ziemniak" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
-                        <Label Text="100g" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
-                        <Label Text="2g" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
-                        <Label Text="20g" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
-                        <Label Text="300" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
-                        <HorizontalStackLayout Grid.Column="5" HorizontalOptions="End">
-                            <Button Text="✎" FontSize="12" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
-                            <Button Text="❌" FontSize="12" BackgroundColor="Transparent" TextColor="Red" />
-                        </HorizontalStackLayout>
-                    </Grid>
+                            <!-- Druga linia: Białko + Węgle + Tłuszcz -->
+                            <Label Text="{Binding Protein, StringFormat='Białko: {0:F1} g  Węgle: {1:F1} g  Tłuszcz: {2:F1} g'}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Start"
+                                   Margin="0,2,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Protein, StringFormat='Białko: {0:F1} g  '}" />
+                                        <Span Text="{Binding Carbohydrate, StringFormat='Węgle: {0:F1} g  '}" />
+                                        <Span Text="{Binding Fat, StringFormat='Tłuszcz: {0:F1} g'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                    <!-- Summary Row -->
-                    <Grid ColumnDefinitions="50,*,70,50,50,70" RowSpacing="5">
-                        <Label Text="" Grid.Column="0" />
-                        <Label Text="Suma" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="1" />
-                        <Label Text="200g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="2" />
-                        <Label Text="22g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="3" />
-                        <Label Text="21g" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="4" />
-                        <Label Text="450" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Grid.Column="5" />
-                    </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-                </VerticalStackLayout>
-            </Border>
+        <!-- Stopka z podsumowaniem -->
+        <Frame BackgroundColor="{StaticResource Gray900}" Padding="10" CornerRadius="10">
+            <VerticalStackLayout Spacing="3">
+                <Label Text="Suma:" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="14"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <!-- Pierwsza linia: Ilość + Kalorie -->
+                <Label Text="{Binding TotalCalories, StringFormat='Kalorie: {0:F0} kcal'}"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="14" />
 
+                <!-- Druga linia: Białko + Węgle + Tłuszcze -->
+                <Label Text="{Binding TotalProtein, StringFormat='Białko: {0:F1} g  Węgle: {1:F1} g  Tłuszcz: {2:F1} g'}"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="14">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding TotalProtein, StringFormat='Białko: {0:F1} g  '}" />
+                            <Span Text="{Binding TotalCarbs, StringFormat='Węgle: {0:F1} g  '}" />
+                            <Span Text="{Binding TotalFat, StringFormat='Tłuszcz: {0:F1} g'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Text="Zapisz posiłek"
+        Command="{Binding SaveMealCommand}"
+        BackgroundColor="{StaticResource Primary}"
+        TextColor="{StaticResource White}"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Center"
+        VerticalOptions="End"
+        WidthRequest="140" />
+    </VerticalStackLayout>
 </ContentPage>

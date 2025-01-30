@@ -20,7 +20,7 @@ namespace HealthApp.PageModels
         {
             if (_firebaseAuthClient.User != null)
             {
-                Shell.Current.GoToAsync("main");
+                Shell.Current.GoToAsync("//Main");
             }
         }
     }

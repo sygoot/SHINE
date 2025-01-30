@@ -8,84 +8,99 @@
     Shell.FlyoutBehavior="Flyout"
     Title="HealthApp">
 
+    <!-- Strona startowa -->
     <ShellContent
         Title="Choose Action"
         Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}" />
+        ContentTemplate="{DataTemplate pages:ChooseSignUpSignInPage}"
+        Route="ChooseAction" />
 
+    <!-- Flyout Menu (Menu boczne) -->
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <!-- Strona główna (MainPage) -->
+        <ShellContent
+            Title="Main"
+            Icon="{StaticResource IconDashboard}"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="Main" />
+        <!-- Absolute route -->
+    </FlyoutItem>
+
+    <FlyoutItem Title="Profile" Icon="{StaticResource IconMeta}">
+        <ShellContent
+            Title="Profile"
+            ContentTemplate="{DataTemplate pages:ProfileMainPage}"
+            Route="Profile" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Sleep" Icon="{StaticResource IconMeta}">
+        <ShellContent
+            Title="Sleep Main"
+            ContentTemplate="{DataTemplate pages:SleepMainPage}"
+            Route="SleepMain" />
+        <ShellContent
+            Title="Sleep Add Data"
+            ContentTemplate="{DataTemplate pages:SleepAddDataPage}"
+            Route="SleepAddData" />
+        <ShellContent
+            Title="Sleep Tips"
+            ContentTemplate="{DataTemplate pages:SleepTipPage}"
+            Route="SleepTips" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Steps" Icon="{StaticResource IconMeta}">
+        <ShellContent
+            Title="Steps Main"
+            ContentTemplate="{DataTemplate pages:StepsMainPage}"
+            Route="StepsMain" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Water" Icon="{StaticResource IconMeta}">
+        <ShellContent
+            Title="Water Main"
+            ContentTemplate="{DataTemplate pages:WaterMainPage}"
+            Route="WaterMain" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Food" Icon="{StaticResource IconMeta}">
+        <ShellContent
+            Title="Food Main"
+            ContentTemplate="{DataTemplate pages:FoodMainPage}"
+            Route="FoodMain" />
+        <ShellContent
+            Title="Food Add Meal"
+            ContentTemplate="{DataTemplate pages:FoodAddMealPage}"
+            Route="FoodAddMeal" />
+        <ShellContent
+            Title="Food Portion Details"
+            ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}"
+            Route="FoodPortionDetails" />
+        <ShellContent
+            Title="Food Meal Details"
+            ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}"
+            Route="FoodMealDetails" />
+    </FlyoutItem>
+
+    <!-- Strony logowania i rejestracji -->
     <ShellContent
-        Title="Main"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:MainPage}" />
-
-
-    <ShellContent
-        Title="Login Page"
+        Title="Login"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:LoginPage}" />
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="Login" />
 
     <ShellContent
-        Title="Register Page"
+        Title="Register"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:RegisterPage}" />
+        ContentTemplate="{DataTemplate pages:RegisterPage}"
+        Route="Register" />
 
     <ShellContent
-        Title="Register Confirmation Page"
+        Title="Register Confirmation"
         Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}" />
+        ContentTemplate="{DataTemplate pages:RegisterConfirmationPage}"
+        Route="RegisterConfirmation" />
 
-    <ShellContent
-        Title="Sleep Main Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepMainPage}" />
-
-    <ShellContent
-        Title="Sleep Add Data"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepAddDataPage}" />
-
-    <ShellContent
-        Title="Sleep Tip Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:SleepTipPage}" />
-
-    <ShellContent
-        Title="Steps Main Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:StepsMainPage}" />
-
-    <ShellContent
-        Title="Water Main Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:WaterMainPage}" />
-
-    <ShellContent
-        Title="Profile Main Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ProfileMainPage}" />
-
-    <ShellContent
-        Title="Food Main Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodMainPage}" />
-
-    <ShellContent
-        Title="Food Add Meal Page"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodAddMealPage}" />
-
-    <ShellContent
-        Title="Food Portion Details"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodPortionDetailsPage}" />
-
-    <ShellContent
-        Title="Food Meal Details"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:FoodMealDetailsPage}" />
-
-
-
+    <!-- Footer z kontrolką do zmiany motywu -->
     <Shell.FlyoutFooter>
         <Grid Padding="15">
             <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 

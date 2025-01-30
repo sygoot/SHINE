@@ -7,90 +7,123 @@
              BackgroundColor="{StaticResource PrimaryDark}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="25">
 
-            <!-- Profile Picture Section -->
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
-                <!-- Back Button -->
-                <Button Text="&#x2190;"
-                        FontSize="18"
+            <!-- Header Section -->
+            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start">
+                <Button ImageSource="back_icon.svg"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource White}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="Start" />
+                        HorizontalOptions="Start"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
 
-                <!-- Profile Picture -->
-                <Border BackgroundColor="{StaticResource Gray200}"
-                        StrokeShape="Ellipse" WidthRequest="120" HeightRequest="120"
-                        HorizontalOptions="Center">
+                <Border StrokeShape="Ellipse" 
+                        WidthRequest="120" 
+                        HeightRequest="120"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HorizontalOptions="Center"
+                        Grid.Column="1">
                     <Image Source="profile_placeholder.png"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           Aspect="AspectFill" />
+                           Aspect="AspectFill"
+                           HeightRequest="120"
+                           WidthRequest="120"/>
                 </Border>
 
-                <!-- Settings Icon -->
-                <Button Text="&#x2699;"
-                        FontSize="18"
+                <Button ImageSource="settings_icon.svg"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource White}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="End" />
+                        HorizontalOptions="End"
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Grid.Column="2"/>
             </Grid>
 
-            <!-- User Name -->
-            <Label Text="Jacek"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="{StaticResource White}" />
-
             <!-- User Details Section -->
-            <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout Spacing="20">
                 <!-- Gender -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x2642;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Gender"
-                           Text="Płeć"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
-                </HorizontalStackLayout>
+                <Frame CornerRadius="10"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="40,*">
+                        <Image Source="gender_icon.svg"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               VerticalOptions="Center"/>
+                        <Entry Placeholder="Gender"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               PlaceholderColor="{StaticResource Gray500}"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
 
                 <!-- Height -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F9D4;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Height (cm)"
-                           Text="123cm"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
-                </HorizontalStackLayout>
+                <Frame CornerRadius="10"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="40,*">
+                        <Image Source="height_icon.svg"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               VerticalOptions="Center"/>
+                        <Entry Placeholder="Height (cm)"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               PlaceholderColor="{StaticResource Gray500}"
+                               Keyboard="Numeric"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
 
                 <!-- Weight -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F4A5;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Weight (kg)"
-                           Text="80kg"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
-                </HorizontalStackLayout>
+                <Frame CornerRadius="10"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="40,*">
+                        <Image Source="weight_icon.svg"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               VerticalOptions="Center"/>
+                        <Entry Placeholder="Weight (kg)"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               PlaceholderColor="{StaticResource Gray500}"
+                               Keyboard="Numeric"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
 
-                <!-- Date of Birth -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F4C5;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Date of Birth"
-                           Text="7.05.2005"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
-                </HorizontalStackLayout>
+                <!-- Birth Date -->
+                <Frame CornerRadius="10"
+                       BackgroundColor="{StaticResource Gray900}"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="40,*">
+                        <Image Source="birthday_icon.svg"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               VerticalOptions="Center"/>
+                        <Entry Placeholder="Birth Date (dd.mm.yyyy)"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               PlaceholderColor="{StaticResource Gray500}"
+                               Keyboard="Numeric"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
             </VerticalStackLayout>
+
+            <!-- Save Button -->
+            <Button Text="Save Changes"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Margin="0,20"
+                    FontSize="16"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"/>
 
         </VerticalStackLayout>
     </ScrollView>

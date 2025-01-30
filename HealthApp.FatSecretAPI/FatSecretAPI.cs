@@ -2,7 +2,7 @@
 using FatSecretDotNet.RequestObjects;
 
 namespace HealthApp.FatSecretAPI;
-public class FatSecretAPI
+public sealed class FatSecretAPI
 {
     private readonly FatSecretClient clientFatService;
     public FatSecretAPI(FatSecretClient fatSecretClient)

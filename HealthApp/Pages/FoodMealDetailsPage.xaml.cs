@@ -2,8 +2,9 @@ namespace HealthApp.Pages;
 
 public partial class FoodMealDetailsPage : ContentPage
 {
-	public FoodMealDetailsPage()
-	{
-		InitializeComponent();
-	}
+    public FoodMealDetailsPage(FoodMealDetailsPageModel vm)
+    {
+        InitializeComponent();
+        BindingContext = vm;
+    }
 }

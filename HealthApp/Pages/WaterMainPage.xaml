@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:HealthApp.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.WaterMainPage"
              Title="Water"
@@ -27,13 +28,24 @@
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto"
                       ColumnDefinitions="*,Auto">
 
-                    <!-- Water Glass Icon -->
-                    <Image Source="glass_placeholder.png"
-                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           HeightRequest="150"
-                           WidthRequest="150" />
+                    <!-- Water Glass Icon z animowaną wodą -->
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                          HeightRequest="150" WidthRequest="150">
+
+                        <!-- Tło szklanki (możesz użyć obrazka SVG/PNG) -->
+                        <Image Source="glass_outline.png"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HeightRequest="150"
+                               WidthRequest="150" />
+
+                        <!-- Animowana woda -->
+                        <controls:WaterGlassView Progress="{Binding DailyProgress}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               HeightRequest="130"
+                                               WidthRequest="130"/>
+                    </Grid>
 
                     <!-- Dzisiejsze spożycie wody -->
                     <Label Text="{Binding TodaysWaterIntake, StringFormat='Dzisiaj: {0} mL'}"
@@ -50,15 +62,6 @@
                            HorizontalOptions="End"
                            VerticalOptions="Center"
                            TextColor="{StaticResource TextPrimary}" />
-
-                    <!-- Pasek postępu -->
-                    <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Progress="{Binding DailyProgress}"
-                                 HeightRequest="10"
-                                 VerticalOptions="Center"
-                                 Margin="0,10,0,0"
-                                 BackgroundColor="{StaticResource Gray300}"
-                                 ProgressColor="{StaticResource Primary}" />
 
                     <!-- Przykładowe przyciski dodawania wody -->
                     <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"

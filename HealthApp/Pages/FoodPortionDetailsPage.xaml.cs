@@ -1,4 +1,4 @@
-namespace HealthApp.Pages;
+﻿namespace HealthApp.Pages;
 
 public partial class FoodPortionDetailsPage : ContentPage
 {
@@ -7,9 +7,12 @@ public partial class FoodPortionDetailsPage : ContentPage
         InitializeComponent();
         BindingContext = model;
     }
+
+    // Już nie musimy korzystać z Clicked w XAML, 
+    // bo mamy to podpięte do komendy AddIngredientCommand
+    // Ale jeśli chcesz, możesz zostawić metodę:
     public async void NavigateToAddMeal(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("foodAddMeal"); // TODO: Implement adding ingredient to list
+        await Shell.Current.GoToAsync("foodAddMeal");
     }
 }
-

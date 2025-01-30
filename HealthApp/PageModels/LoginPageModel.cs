@@ -25,24 +25,6 @@ public partial class LoginPageModel : ObservableObject
         _firebaseAuthClient = firebaseAuthClient;
         _databaseService = databaseService;
         _logger = logger;
-        //_databaseService.UserTable.ListenForChanges().Subscribe(
-        //    user =>
-        //    {
-
-        //    },
-        //    error =>
-        //    {
-        //        switch (error)
-        //        {
-        //            case UnauthorizedAccessException:
-        //                break;
-        //            case HttpProtocolException:
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    });
-
     }
 
     [RelayCommand]
@@ -55,7 +37,7 @@ public partial class LoginPageModel : ObservableObject
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        Shell.Current.GoToAsync("main");
+                        Shell.Current.GoToAsync("//Main");
                         _logger.LogInformation("User logged in");
                     });
 

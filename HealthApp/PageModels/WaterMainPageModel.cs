@@ -1,4 +1,4 @@
-﻿using System.Reactive.Linq;  // ważne, aby móc wywołać .FirstAsync() na IObservable
+﻿using System.Reactive.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -13,16 +13,15 @@ namespace HealthApp.PageModels
         [ObservableProperty]
         private double _todaysWaterIntake;
 
-        private const double DailyGoal = 3000.0;
+        [ObservableProperty]
+        private double _dailyProgress; // Teraz jako osobna właściwość z powiadamianiem
 
-        public double DailyProgress => TodaysWaterIntake / DailyGoal;
+        private const double DailyGoal = 3000.0;
 
         public WaterMainPageModel(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
             AddWaterCommand = new RelayCommand<string>(async (volumeLabel) => await AddWater(volumeLabel));
-
-            // Pobierz aktualny stan przy tworzeniu
             _ = RefreshDailyIntake();
         }
 
@@ -39,32 +38,26 @@ namespace HealthApp.PageModels
                     Volume: volume
                 );
 
-                // Dodaj rekord do bazy
-                await _databaseService
-                    .WaterTable
-                    .Add(waterRecord)
-                    .FirstAsync();  // .FirstAsync() “uruchamia” obserwowalny strumień i czeka na wynik
-
-                // Odśwież sumę dzienną
+                await _databaseService.WaterTable.Add(waterRecord).FirstAsync();
                 await RefreshDailyIntake();
+
+                // Animacja progresu
+                var targetProgress = TodaysWaterIntake / DailyGoal;
+                await Task.Delay(50); // Opóźnienie dla płynności animacji
+                DailyProgress = targetProgress;
             }
         }
 
         private async Task RefreshDailyIntake()
         {
-            // Pobierz wszystkie rekordy jako IEnumerable<Water>
-            var allRecords = await _databaseService
-                .WaterTable
-                .GetAll()
-                .FirstAsync();  // czekamy, aż IObservable wyemituje wynik
+            var allRecords = await _databaseService.WaterTable.GetAll().FirstAsync();
 
-            // W pamięci filtrujemy tylko dzisiejszą datę i sumujemy objętość
             var sum = allRecords
                 .Where(r => r.RecordTime.Date == DateTime.Today)
                 .Sum(r => r.Volume);
 
             TodaysWaterIntake = sum;
-            OnPropertyChanged(nameof(DailyProgress));
+            DailyProgress = TodaysWaterIntake / DailyGoal; // Aktualizuj progres
         }
     }
 }

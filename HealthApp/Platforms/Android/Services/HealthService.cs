@@ -32,9 +32,7 @@ namespace HealthApp.Services
         public Instant? DateTimeToInstant(DateTime date)
             => Instant.OfEpochSecond(((DateTimeOffset)date).ToUnixTimeSeconds());
 
-        // --------------------------------------------------------
-        // Metoda do kroków (działa jak zawsze):
-        // --------------------------------------------------------
+
         public async Task<int> FetchStepsData(DateTime startingDay, DateTime endingDay)
         {
             try
