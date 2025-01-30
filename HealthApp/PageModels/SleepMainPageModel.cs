@@ -36,10 +36,11 @@ namespace HealthApp.PageModels
 
                 var sleepData = await _healthService.FetchSleepData(startingDay, endingDay);
 
-                if (sleepData != null)
+                var firstSleep = sleepData.FirstOrDefault();
+                if (firstSleep != null)
                 {
-                    SleepStartTime = sleepData.StartTime;
-                    SleepEndTime = sleepData.EndTime;
+                    SleepStartTime = firstSleep.StartTime;
+                    SleepEndTime = firstSleep.EndTime;
                     SleepDuration = SleepEndTime - SleepStartTime;
                 }
                 else
