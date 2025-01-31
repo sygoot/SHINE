@@ -23,24 +23,31 @@
                HeightRequest="100" />
 
         <!-- Username Entry -->
-        <Entry Placeholder="Username"
-               Grid.Row="1"
-               Text="{Binding Username}"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}" />
-               
+        <VerticalStackLayout Grid.Row="1" Spacing="5">
+            <Label Text="Username" FontSize="14" TextColor="{StaticResource White}"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False" HeightRequest="50">
+                <Entry Placeholder="Enter Username"
+                       Text="{Binding Username}"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource Gray300}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
+        </VerticalStackLayout>
 
         <!-- Password Entry -->
-        <Entry Placeholder="Password"
-               Grid.Row="2"
-               Text="{Binding Password}"
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="Center"
-               BackgroundColor="{StaticResource White}"
-               TextColor="{StaticResource TextPrimary}"
-               IsPassword="True" />
+        <VerticalStackLayout Grid.Row="2" Spacing="5">
+            <Label Text="Password" FontSize="14" TextColor="{StaticResource White}"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False" HeightRequest="50">
+                <Entry Placeholder="Enter Password"
+                       Text="{Binding Password}"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource Gray300}"
+                       HeightRequest="40"
+                       Margin="10,0"
+                       IsPassword="True"/>
+            </Frame>
+        </VerticalStackLayout>
 
         <!-- Login Button -->
         <Button Text="Login"

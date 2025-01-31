@@ -25,7 +25,7 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Enter your first name"
+                <Entry Placeholder="Enter first name"
                        Text="{Binding FirstName}"
                        BackgroundColor="Transparent"
                        TextColor="{StaticResource TextPrimary}"
@@ -43,7 +43,7 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Enter your last name"
+                <Entry Placeholder="Enter last name"
                        x:Name="LastNameEntry"
                        Text="{Binding LastName}"
                        BackgroundColor="Transparent"
@@ -62,7 +62,7 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Choose a username"
+                <Entry Placeholder="Choose username"
                        x:Name="UsernameEntry"
                        Text="{Binding Username}"
                        BackgroundColor="Transparent"
@@ -81,7 +81,7 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Enter your email"
+                <Entry Placeholder="Enter email"
                        x:Name="EmailEntry"
                        Text="{Binding Email}"
                        Keyboard="Email"
@@ -101,7 +101,7 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Enter your password"
+                <Entry Placeholder="Enter password"
                        x:Name="PasswordEntry"
                        Text="{Binding Password}"
                        IsPassword="True"
@@ -121,12 +121,12 @@
                    Padding="0"
                    BorderColor="{StaticResource Gray300}"
                    HasShadow="False">
-                <Entry Placeholder="Re-enter your password"
+                <Entry Placeholder="Re-enter password"
                        x:Name="ConfirmPasswordEntry"
                        Text="{Binding ConfirmPassword}"
                        IsPassword="True"
                        BackgroundColor="Transparent"
-                       TextColor="{StaticResource TextPrimary}"
+                       TextColor="{StaticResource Gray300}"
                        HeightRequest="40"
                        Margin="10,0"/>
             </Frame>
