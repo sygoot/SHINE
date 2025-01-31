@@ -36,9 +36,6 @@ public partial class StepsMainPage : ContentPage
 
             // Zapisz rekord do bazy danych
             await _databaseService.StepsTable.Add(stepsRecord);
-
-            // Powiadom użytkownika o sukcesie
-            await Shell.Current.DisplayAlert("Sukces", "Kroki zostały zapisane", "OK");
         }
         catch (Exception ex)
         {
