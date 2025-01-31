@@ -39,11 +39,17 @@
         </StackLayout>
 
         <!-- Emotka w środku -->
-        <Label Text="😐"
-               FontSize="48"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Grid.Row="2" Grid.ColumnSpan="2" />
+        <Image Source="target.svg"
+                   WidthRequest="60"
+                   HeightRequest="60"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="2" Grid.ColumnSpan="2">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavigateToTargetSelection" />
+            </Image.GestureRecognizers>
+        </Image>
+
 
         <!-- Ikona Sleep -->
         <ImageButton Grid.Row="1" Grid.Column="0"

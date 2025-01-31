@@ -2,8 +2,9 @@ namespace HealthApp.Pages;
 
 public partial class ProfileMainPage : ContentPage
 {
-	public ProfileMainPage()
-	{
-		InitializeComponent();
-	}
+    public ProfileMainPage(ProfileMainPageModel model)
+    {
+        InitializeComponent();
+        BindingContext = model;
+    }
 }
