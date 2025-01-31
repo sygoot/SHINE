@@ -16,7 +16,6 @@ public sealed class FatSecretAPI
         {
             SearchExpression = food,
             MaxResults = 10,
-
         };
 
         var fatServiceAPIResult = await clientFatService.FoodsSearchAsync(request);

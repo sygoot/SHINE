@@ -65,6 +65,8 @@ namespace HealthApp
             builder.Services.AddTransientWithShellRoute<RegisterPage, RegisterPageModel>("register");
             builder.Services.AddTransientWithShellRoute<RegisterConfirmationPage, RegisterConfirmationPageModel>("registerConfirmation");
             builder.Services.AddTransientWithShellRoute<LoginPage, LoginPageModel>("login");
+            builder.Services.AddTransientWithShellRoute<TargetSelectionPage, TargetSelectionPageModel>("targetSelection");
+
 
             // Other pages
             builder.Services.AddTransientWithShellRoute<MainPage, MainPageModel>("main");

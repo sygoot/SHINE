@@ -1,96 +1,145 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.ProfileMainPage"
              Title="Profile"
              BackgroundColor="{StaticResource PrimaryDark}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
 
-            <!-- Profile Picture Section -->
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
-                <!-- Back Button -->
-                <Button Text="&#x2190;"
-                        FontSize="18"
+            <!-- Header Section -->
+            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start" Padding="10">
+                <Button ImageSource="back_icon.svg"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource White}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="Start" />
+                        HorizontalOptions="Start"
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Command="{Binding GoBackCommand}"/>
 
-                <!-- Profile Picture -->
-                <Border BackgroundColor="{StaticResource Gray200}"
-                        StrokeShape="Ellipse" WidthRequest="120" HeightRequest="120"
-                        HorizontalOptions="Center">
+                <Border StrokeShape="Ellipse" 
+                        WidthRequest="120" 
+                        HeightRequest="120"
+                        BackgroundColor="{StaticResource Gray200}"
+                        HorizontalOptions="Center"
+                        Grid.Column="1"
+                        Margin="0,0,0,30">
                     <Image Source="profile_placeholder.png"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           Aspect="AspectFill" />
+                           Aspect="AspectFill"
+                           HeightRequest="120"
+                           WidthRequest="120"/>
                 </Border>
 
-                <!-- Settings Icon -->
-                <Button Text="&#x2699;"
-                        FontSize="18"
+                <Button ImageSource="settings_icon.svg"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource White}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="End" />
+                        HorizontalOptions="End"
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Grid.Column="2"/>
             </Grid>
 
-            <!-- User Name -->
-            <Label Text="Jacek"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="{StaticResource White}" />
-
             <!-- User Details Section -->
-            <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
+
                 <!-- Gender -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x2642;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Gender"
-                           Text="Płeć"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="gender_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <Picker Title="Select Gender"
+                                ItemsSource="{Binding Genders}"
+                                SelectedItem="{Binding SelectedGender, Mode=TwoWay}"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource Gray300}"
+                                HeightRequest="40"
+                                Margin="10,0"/>
+                    </Frame>
                 </HorizontalStackLayout>
 
                 <!-- Height -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F9D4;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Height (cm)"
-                           Text="123cm"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="height_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <Entry Placeholder="Height (cm)"
+                               Text="{Binding Height, Mode=TwoWay}"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               Keyboard="Numeric"/>
+                    </Frame>
                 </HorizontalStackLayout>
 
                 <!-- Weight -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F4A5;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Weight (kg)"
-                           Text="80kg"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="weight_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <Entry Placeholder="Weight (kg)"
+                               Text="{Binding Weight, Mode=TwoWay}"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="16"
+                               Keyboard="Numeric"/>
+                    </Frame>
                 </HorizontalStackLayout>
 
-                <!-- Date of Birth -->
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="&#x1F4C5;"
-                           FontSize="18"
-                           TextColor="{StaticResource White}" />
-                    <Entry Placeholder="Date of Birth"
-                           Text="7.05.2005"
-                           BackgroundColor="{StaticResource Gray200}"
-                           TextColor="{StaticResource TextPrimary}" />
+                <!-- Birth Date -->
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="birthday_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <DatePicker Date="{Binding DateOfBirth, Mode=TwoWay}"
+                                    Format="dd/MM/yyyy"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource Gray300}"
+                                    HeightRequest="40"
+                                    Margin="10,0"/>
+                    </Frame>
                 </HorizontalStackLayout>
+
             </VerticalStackLayout>
+
+            <!-- Save Button -->
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    FontSize="16"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    WidthRequest="200"
+                    HorizontalOptions="Center"
+                    Margin="20,20"/>
 
         </VerticalStackLayout>
     </ScrollView>

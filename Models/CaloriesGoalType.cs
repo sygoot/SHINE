@@ -3,8 +3,8 @@
     public enum CaloriesGoalType
     {
         Custom,
-        Reduction,
-        Maintain,
-        Gain
+        WeightLoss,
+        Maintenance,
+        WeightGain
     }
 }

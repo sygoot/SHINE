@@ -19,65 +19,76 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-
-
-
+        <!-- Przyciski nawigacji i data -->
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Text="Yesterday "
+            <Button Text="&lt;"
                     BackgroundColor="Transparent"
-                    TextColor="{StaticResource White}" />
-            <Label Text="Today"
-                   FontSize="18"
-                   HorizontalOptions="Center"
-                   TextColor="{StaticResource White}" />
-            <Button Text="Tomorrow"
+                    TextColor="{StaticResource White}"
+                    Clicked="OnPreviousDayClicked" />
+
+            <Button Text="{Binding SelectedDate, StringFormat='{0:dd MMM yyyy}'}"
                     BackgroundColor="Transparent"
-                    TextColor="{StaticResource White}" />
+                    TextColor="{StaticResource White}"
+                    IsEnabled="False" />
+
+            <Button Text="&gt;"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource White}"
+                    Clicked="OnNextDayClicked"
+                    IsEnabled="{Binding IsNextDayEnabled}" />
         </StackLayout>
 
-
-        <Label Text="😐"
-            FontSize="48"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Grid.Row="2" Grid.ColumnSpan="2" />
-
-            <Button Grid.Row="1" Grid.Column="0"
-                Text="😴"
-                FontSize="18"
-                Clicked="NavigateToSleep"
-                TextColor="{StaticResource White}"
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
+        <!-- Emotka w środku -->
+        <Image Source="target.svg"
+                   WidthRequest="60"
+                   HeightRequest="60"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="2" Grid.ColumnSpan="2">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavigateToTargetSelection" />
+            </Image.GestureRecognizers>
+        </Image>
 
 
-                <Button Grid.Row="1" Grid.Column="1"
-                Text="🏃"
-                    FontSize="18"
-                Clicked="NavigateToSteps"
-                TextColor="{StaticResource White}"
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
+        <!-- Ikona Sleep -->
+        <ImageButton Grid.Row="1" Grid.Column="0"
+                     Source="sleep.svg"
+                     WidthRequest="15"
+                     HeightRequest="15"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Clicked="NavigateToSleep" />
 
-                    <Button Grid.Row="3" Grid.Column="0"
-                Text="🍔"
-                        FontSize="18"
-                Clicked="NavigateToFood"
-                TextColor="{StaticResource White}"
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
+        <!-- Ikona Steps -->
+        <ImageButton Grid.Row="1" Grid.Column="1"
+                     Source="steps.svg"
+                     WidthRequest="15"
+                     HeightRequest="15"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Clicked="NavigateToSteps" />
 
+        <!-- Ikona Nutrition -->
+        <ImageButton Grid.Row="3" Grid.Column="0"
+                     Source="nutrition.svg"
+                     WidthRequest="15"
+                     HeightRequest="15"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Clicked="NavigateToFood" />
 
-                        <Button Grid.Row="3" Grid.Column="1"
-                Text="🍻"
-                            FontSize="18"
-                Clicked="NavigateToWater"
-                TextColor="{StaticResource White}"
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
+        <!-- Ikona Hydration -->
+        <ImageButton Grid.Row="3" Grid.Column="1"
+                     Source="hydration.svg"
+                     WidthRequest="15"
+                     HeightRequest="15"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Clicked="NavigateToWater" />
     </Grid>
 </ContentPage>
