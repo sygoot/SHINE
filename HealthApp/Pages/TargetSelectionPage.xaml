@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthApp.Pages.TargetSelectionPage"
+             Title="Target Selection"
+             BackgroundColor="{StaticResource PrimaryDark}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="5" VerticalOptions="Center">
+
+            <!-- Nagłówek -->
+            <Label Text="SET YOUR TARGETS"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource White}"
+                   HorizontalOptions="Center" />
+
+            <!-- Steps Goal -->
+            <Label Text="Daily Steps Goal"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter Your Steps Goal"
+                       Text="{Binding StepsGoal, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
+
+            <!-- Water Goal -->
+            <Label Text="Water Intake Goal (ml)"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter Your Water Intake Goal"
+                       Text="{Binding HydrationGoalMl, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
+
+            <!-- Sleep Goal -->
+            <Label Text="Sleep Goal (hours)"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter Your Sleep Goal"
+                       Text="{Binding SleepGoal, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
+
+            <!-- Calories Goal -->
+            <Label Text="Caloric Intake Goal (kcal)"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter Your Goal"
+                       Text="{Binding CaloriesGoal, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource Gray300}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
+
+            <!-- Calories Goal Type Picker -->
+            <Label Text="Select Calories Goal Type"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Picker Title="Select Calories Goal Type"
+                        ItemsSource="{Binding CaloriesGoalTypes}"
+                        SelectedItem="{Binding CaloriesGoalTypeString, Mode=TwoWay}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray300}"
+                        HeightRequest="40"
+                        Margin="10,0"/>
+            </Frame>
+
+            <!-- Switch do generowania celu kalorycznego -->
+            <HorizontalStackLayout VerticalOptions="Center">
+                <Label Text="Auto Generate Calories "
+                       TextColor="{StaticResource White}"
+                       VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding CaloriesIsGenerated, Mode=TwoWay}"
+                        HorizontalOptions="End"/>
+            </HorizontalStackLayout>
+
+            <!-- Przycisk Save -->
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Margin="10,20"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

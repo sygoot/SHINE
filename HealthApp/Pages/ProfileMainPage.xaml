@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.ProfileMainPage"
              Title="Profile"
              BackgroundColor="{StaticResource PrimaryDark}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="25">
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
 
             <!-- Header Section -->
-            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start">
+            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start" Padding="10">
                 <Button ImageSource="back_icon.svg"
                         BackgroundColor="Transparent"
                         HorizontalOptions="Start"
                         WidthRequest="30"
-                        HeightRequest="30"/>
+                        HeightRequest="30"
+                        Command="{Binding GoBackCommand}"/>
 
                 <Border StrokeShape="Ellipse" 
                         WidthRequest="120" 
                         HeightRequest="120"
                         BackgroundColor="{StaticResource Gray200}"
                         HorizontalOptions="Center"
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        Margin="0,0,0,30">
                     <Image Source="profile_placeholder.png"
                            Aspect="AspectFill"
                            HeightRequest="120"
@@ -38,92 +39,107 @@
             </Grid>
 
             <!-- User Details Section -->
-            <VerticalStackLayout Spacing="20">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
+
                 <!-- Gender -->
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray900}"
-                       Padding="15"
-                       HasShadow="False">
-                    <Grid ColumnDefinitions="40,*">
-                        <Image Source="gender_icon.svg"
-                               WidthRequest="25"
-                               HeightRequest="25"
-                               VerticalOptions="Center"/>
-                        <Entry Placeholder="Gender"
-                               TextColor="{StaticResource TextPrimary}"
-                               FontSize="16"
-                               PlaceholderColor="{StaticResource Gray500}"
-                               Grid.Column="1"/>
-                    </Grid>
-                </Frame>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="gender_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <Picker Title="Select Gender"
+                                ItemsSource="{Binding Genders}"
+                                SelectedItem="{Binding SelectedGender, Mode=TwoWay}"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource Gray300}"
+                                HeightRequest="40"
+                                Margin="10,0"/>
+                    </Frame>
+                </HorizontalStackLayout>
 
                 <!-- Height -->
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray900}"
-                       Padding="15"
-                       HasShadow="False">
-                    <Grid ColumnDefinitions="40,*">
-                        <Image Source="height_icon.svg"
-                               WidthRequest="25"
-                               HeightRequest="25"
-                               VerticalOptions="Center"/>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="height_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
                         <Entry Placeholder="Height (cm)"
+                               Text="{Binding Height, Mode=TwoWay}"
+                               BackgroundColor="Transparent"
                                TextColor="{StaticResource TextPrimary}"
                                FontSize="16"
-                               PlaceholderColor="{StaticResource Gray500}"
-                               Keyboard="Numeric"
-                               Grid.Column="1"/>
-                    </Grid>
-                </Frame>
+                               Keyboard="Numeric"/>
+                    </Frame>
+                </HorizontalStackLayout>
 
                 <!-- Weight -->
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray900}"
-                       Padding="15"
-                       HasShadow="False">
-                    <Grid ColumnDefinitions="40,*">
-                        <Image Source="weight_icon.svg"
-                               WidthRequest="25"
-                               HeightRequest="25"
-                               VerticalOptions="Center"/>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="weight_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
                         <Entry Placeholder="Weight (kg)"
+                               Text="{Binding Weight, Mode=TwoWay}"
+                               BackgroundColor="Transparent"
                                TextColor="{StaticResource TextPrimary}"
                                FontSize="16"
-                               PlaceholderColor="{StaticResource Gray500}"
-                               Keyboard="Numeric"
-                               Grid.Column="1"/>
-                    </Grid>
-                </Frame>
+                               Keyboard="Numeric"/>
+                    </Frame>
+                </HorizontalStackLayout>
 
                 <!-- Birth Date -->
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray900}"
-                       Padding="15"
-                       HasShadow="False">
-                    <Grid ColumnDefinitions="40,*">
-                        <Image Source="birthday_icon.svg"
-                               WidthRequest="25"
-                               HeightRequest="25"
-                               VerticalOptions="Center"/>
-                        <Entry Placeholder="Birth Date (dd.mm.yyyy)"
-                               TextColor="{StaticResource TextPrimary}"
-                               FontSize="16"
-                               PlaceholderColor="{StaticResource Gray500}"
-                               Keyboard="Numeric"
-                               Grid.Column="1"/>
-                    </Grid>
-                </Frame>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Image Source="birthday_icon.svg"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"/>
+                    <Frame CornerRadius="10"
+                           BackgroundColor="{StaticResource White}"
+                           Padding="5"
+                           BorderColor="{StaticResource Gray500}"
+                           HasShadow="False"
+                           WidthRequest="230">
+                        <DatePicker Date="{Binding DateOfBirth, Mode=TwoWay}"
+                                    Format="dd/MM/yyyy"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource Gray300}"
+                                    HeightRequest="40"
+                                    Margin="10,0"/>
+                    </Frame>
+                </HorizontalStackLayout>
+
             </VerticalStackLayout>
 
             <!-- Save Button -->
-            <Button Text="Save Changes"
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
                     CornerRadius="25"
                     HeightRequest="50"
-                    Margin="0,20"
                     FontSize="16"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="{StaticResource White}"
-                    FontAttributes="Bold"/>
+                    FontAttributes="Bold"
+                    WidthRequest="200"
+                    HorizontalOptions="Center"
+                    Margin="20,20"/>
 
         </VerticalStackLayout>
     </ScrollView>

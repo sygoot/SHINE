@@ -2,11 +2,16 @@
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPage(MainPageModel model)
     {
         InitializeComponent();
+        BindingContext = model;
     }
 
+    private async void NavigateToTargetSelection(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("targetSelection");
+    }
     private async void NavigateToSteps(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("steps");

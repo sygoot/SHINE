@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="HealthApp.Pages.RegisterPage"
              Title="Register"
              BackgroundColor="{StaticResource PrimaryDark}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <VerticalStackLayout Padding="30" Spacing="0" VerticalOptions="Center">
+
             <!-- Logo -->
             <Image Source="Resources/Images/logo.svg"
                    HorizontalOptions="Center"
@@ -16,95 +16,211 @@
                    HeightRequest="100" />
 
             <!-- First Name Entry -->
-            <Entry Placeholder="First Name"
-                   Text="{Binding FirstName}"
-                   Completed="FirstNameCompleted"
+            <Label Text="First Name"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your first name"
+                       Text="{Binding FirstName}"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Last Name Entry -->
-            <Entry Placeholder="Last Name"
-                   x:Name="LastNameEntry"
-                   Text="{Binding LastName}"
-                   Completed="LastNameCompleted"
+            <Label Text="Last Name"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your last name"
+                       x:Name="LastNameEntry"
+                       Text="{Binding LastName}"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Username Entry -->
-            <Entry Placeholder="Username"
-                   x:Name="UsernameEntry"
-                   Text="{Binding Username}"
-                   Completed="UsernameCompleted"
+            <Label Text="Username"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Choose a username"
+                       x:Name="UsernameEntry"
+                       Text="{Binding Username}"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Email Entry -->
-            <Entry Placeholder="Email"
-                   x:Name="EmailEntry"
-                   Text="{Binding Email}"
-                   Keyboard="Email"
-                   Completed="EmailCompleted"
+            <Label Text="Email"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your email"
+                       x:Name="EmailEntry"
+                       Text="{Binding Email}"
+                       Keyboard="Email"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Password Entry -->
-            <Entry Placeholder="Password"
-                   x:Name="PasswordEntry"
-                   Text="{Binding Password}"
-                   IsPassword="True"
-                   Completed="PasswordCompleted"
+            <Label Text="Password"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your password"
+                       x:Name="PasswordEntry"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Confirm Password Entry -->
-            <Entry Placeholder="Confirm Password"
-                   x:Name="ConfirmPasswordEntry"
-                   Text="{Binding ConfirmPassword}"
-                   IsPassword="True"
-                   Completed="ConfirmPasswordCompleted"
+            <Label Text="Confirm Password"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Re-enter your password"
+                       x:Name="ConfirmPasswordEntry"
+                       Text="{Binding ConfirmPassword}"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Gender Picker -->
-            <Picker Title="Select Gender"
-                    x:Name="GenderPicker"
-                    ItemsSource="{Binding Genders}"
-                    SelectedItem="{Binding SelectedGender}"
-                    BackgroundColor="{StaticResource White}"
-                    TextColor="{StaticResource TextPrimary}" />
+            <Label Text="Gender"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Picker Title="Select Gender"
+                        x:Name="GenderPicker"
+                        ItemsSource="{Binding Genders}"
+                        SelectedItem="{Binding SelectedGender}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray300}"
+                        HeightRequest="40"
+                        Margin="10,0"/>
+            </Frame>
 
             <!-- Height Entry -->
-            <Entry Placeholder="Height (cm)"
-                   x:Name="HeightEntry"
-                   Text="{Binding Height}"
-                   Keyboard="Numeric"
-                   Completed="HeightCompleted"
+            <Label Text="Height (cm)"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your height"
+                       x:Name="HeightEntry"
+                       Text="{Binding Height}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Weight Entry -->
-            <Entry Placeholder="Weight (kg)"
-                   x:Name="WeightEntry"
-                   Text="{Binding Weight}"
-                   Keyboard="Numeric"
-                   Completed="WeightCompleted"
+            <Label Text="Weight (kg)"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
                    BackgroundColor="{StaticResource White}"
-                   TextColor="{StaticResource TextPrimary}" />
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <Entry Placeholder="Enter your weight"
+                       x:Name="WeightEntry"
+                       Text="{Binding Weight}"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="{StaticResource TextPrimary}"
+                       HeightRequest="40"
+                       Margin="10,0"/>
+            </Frame>
 
             <!-- Date of Birth DatePicker -->
-            <DatePicker Date="{Binding DateOfBirth}"
-                        x:Name="DatePicker"
-                        Format="dd/MM/yyyy"
-                        BackgroundColor="{StaticResource White}"
-                        TextColor="{StaticResource TextPrimary}" />
+            <Label Text="Date of Birth"
+                   FontSize="14"
+                   TextColor="{StaticResource White}"
+                   Margin="0,5"/>
+            <Frame CornerRadius="10"
+                   BackgroundColor="{StaticResource White}"
+                   Padding="0"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="False">
+                <DatePicker Date="{Binding DateOfBirth}"
+                            x:Name="DatePicker"
+                            Format="dd/MM/yyyy"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Gray300}"
+                            HeightRequest="40"
+                            Margin="10,0"/>
+            </Frame>
 
             <!-- Register Button -->
             <Button Text="Register"
                     Command="{Binding RegisterCommand}"
-                    HorizontalOptions="Center"
-                    WidthRequest="200"
                     BackgroundColor="{StaticResource Primary}"
-                    TextColor="{StaticResource White}" />
+                    TextColor="{StaticResource White}"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Margin="10,20"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
