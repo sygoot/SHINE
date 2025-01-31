@@ -16,72 +16,44 @@
                    HorizontalOptions="Center" />
 
             <!-- Steps Goal -->
-            <Label Text="Daily Steps Goal"
-                   FontSize="14"
-                   TextColor="{StaticResource White}"
-                   Margin="0,5"/>
-            <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource White}"
-                   Padding="0"
-                   BorderColor="{StaticResource Gray300}"
-                   HasShadow="False">
+            <Label Text="Daily Steps Goal" FontSize="14" TextColor="{StaticResource White}" Margin="0,5"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
                 <Entry Placeholder="Enter Your Steps Goal"
                        Text="{Binding StepsGoal, Mode=TwoWay}"
                        Keyboard="Numeric"
                        BackgroundColor="Transparent"
-                       TextColor="{StaticResource TextPrimary}"
+                       TextColor="{StaticResource Gray300}"
                        HeightRequest="40"
                        Margin="10,0"/>
             </Frame>
 
             <!-- Water Goal -->
-            <Label Text="Water Intake Goal (ml)"
-                   FontSize="14"
-                   TextColor="{StaticResource White}"
-                   Margin="0,5"/>
-            <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource White}"
-                   Padding="0"
-                   BorderColor="{StaticResource Gray300}"
-                   HasShadow="False">
+            <Label Text="Water Intake Goal (ml)" FontSize="14" TextColor="{StaticResource White}" Margin="0,5"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
                 <Entry Placeholder="Enter Your Water Intake Goal"
                        Text="{Binding HydrationGoalMl, Mode=TwoWay}"
                        Keyboard="Numeric"
                        BackgroundColor="Transparent"
-                       TextColor="{StaticResource TextPrimary}"
+                       TextColor="{StaticResource Gray300}"
                        HeightRequest="40"
                        Margin="10,0"/>
             </Frame>
 
             <!-- Sleep Goal -->
-            <Label Text="Sleep Goal (hours)"
-                   FontSize="14"
-                   TextColor="{StaticResource White}"
-                   Margin="0,5"/>
-            <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource White}"
-                   Padding="0"
-                   BorderColor="{StaticResource Gray300}"
-                   HasShadow="False">
+            <Label Text="Sleep Goal (hours)" FontSize="14" TextColor="{StaticResource White}" Margin="0,5"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
                 <Entry Placeholder="Enter Your Sleep Goal"
                        Text="{Binding SleepGoal, Mode=TwoWay}"
                        Keyboard="Numeric"
                        BackgroundColor="Transparent"
-                       TextColor="{StaticResource TextPrimary}"
+                       TextColor="{StaticResource Gray300}"
                        HeightRequest="40"
                        Margin="10,0"/>
             </Frame>
 
             <!-- Calories Goal -->
-            <Label Text="Caloric Intake Goal (kcal)"
-                   FontSize="14"
-                   TextColor="{StaticResource White}"
-                   Margin="0,5"/>
-            <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource White}"
-                   Padding="0"
-                   BorderColor="{StaticResource Gray300}"
-                   HasShadow="False">
+            <Label Text="Caloric Intake Goal (kcal)" FontSize="14" TextColor="{StaticResource White}" Margin="0,5"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
                 <Entry Placeholder="Enter Your Goal"
                        Text="{Binding CaloriesGoal, Mode=TwoWay}"
                        Keyboard="Numeric"
@@ -92,15 +64,8 @@
             </Frame>
 
             <!-- Calories Goal Type Picker -->
-            <Label Text="Select Calories Goal Type"
-                   FontSize="14"
-                   TextColor="{StaticResource White}"
-                   Margin="0,5"/>
-            <Frame CornerRadius="10"
-                   BackgroundColor="{StaticResource White}"
-                   Padding="0"
-                   BorderColor="{StaticResource Gray300}"
-                   HasShadow="False">
+            <Label Text="Select Calories Goal Type" FontSize="14" TextColor="{StaticResource White}" Margin="0,5"/>
+            <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
                 <Picker Title="Select Calories Goal Type"
                         ItemsSource="{Binding CaloriesGoalTypes}"
                         SelectedItem="{Binding CaloriesGoalTypeString, Mode=TwoWay}"
@@ -110,16 +75,13 @@
                         Margin="10,0"/>
             </Frame>
 
-            <!-- Switch do generowania celu kalorycznego -->
+            <!-- Auto Generate Calories -->
             <HorizontalStackLayout VerticalOptions="Center">
-                <Label Text="Auto Generate Calories "
-                       TextColor="{StaticResource White}"
-                       VerticalOptions="Center"/>
-                <Switch IsToggled="{Binding CaloriesIsGenerated, Mode=TwoWay}"
-                        HorizontalOptions="End"/>
+                <Label Text="Auto Generate Calories " TextColor="{StaticResource White}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding CaloriesIsGenerated, Mode=TwoWay}" HorizontalOptions="End"/>
             </HorizontalStackLayout>
 
-            <!-- Przycisk Save -->
+            <!-- Save Button -->
             <Button Text="Save"
                     Command="{Binding SaveCommand}"
                     BackgroundColor="{StaticResource Primary}"

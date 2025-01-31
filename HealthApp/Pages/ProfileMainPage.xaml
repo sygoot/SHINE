@@ -9,7 +9,7 @@
         <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
 
             <!-- Header Section -->
-            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start" Padding="10">
+            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Start" Padding="0">
                 <Button ImageSource="back_icon.svg"
                         BackgroundColor="Transparent"
                         HorizontalOptions="Start"
@@ -17,13 +17,9 @@
                         HeightRequest="30"
                         Command="{Binding GoBackCommand}"/>
 
-                <Border StrokeShape="Ellipse" 
-                        WidthRequest="120" 
-                        HeightRequest="120"
+                <Border StrokeShape="Ellipse" WidthRequest="120" HeightRequest="120"
                         BackgroundColor="{StaticResource Gray200}"
-                        HorizontalOptions="Center"
-                        Grid.Column="1"
-                        Margin="0,0,0,30">
+                        HorizontalOptions="Center" Grid.Column="1" Margin="0,0,0,0">
                     <Image Source="profile_placeholder.png"
                            Aspect="AspectFill"
                            HeightRequest="120"
@@ -42,89 +38,51 @@
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
 
                 <!-- Gender -->
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Image Source="gender_icon.svg"
-                           WidthRequest="30"
-                           HeightRequest="30"
-                           VerticalOptions="Center"/>
-                    <Frame CornerRadius="10"
-                           BackgroundColor="{StaticResource White}"
-                           Padding="5"
-                           BorderColor="{StaticResource Gray500}"
-                           HasShadow="False"
-                           WidthRequest="230">
-                        <Picker Title="Select Gender"
-                                ItemsSource="{Binding Genders}"
-                                SelectedItem="{Binding SelectedGender, Mode=TwoWay}"
+                <Label Text="Gender" FontSize="14" TextColor="{StaticResource White}" Margin="0,0"/>
+                <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                    <Picker Title="Select Gender"
+                            ItemsSource="{Binding Genders}"
+                            SelectedItem="{Binding SelectedGender, Mode=TwoWay}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Gray300}"
+                            HeightRequest="40"
+                            Margin="10,0"/>
+                </Frame>
+
+                <!-- Height -->
+                <Label Text="Height (cm)" FontSize="14" TextColor="{StaticResource White}" Margin="0,0"/>
+                <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                    <Entry Placeholder="Enter your height"
+                           Text="{Binding Height, Mode=TwoWay}"
+                           Keyboard="Numeric"
+                           BackgroundColor="Transparent"
+                           TextColor="{StaticResource Gray300}"
+                           HeightRequest="40"
+                           Margin="10,0"/>
+                </Frame>
+
+                <!-- Weight -->
+                <Label Text="Weight (kg)" FontSize="14" TextColor="{StaticResource White}" Margin="0,0"/>
+                <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                    <Entry Placeholder="Enter your weight"
+                           Text="{Binding Weight, Mode=TwoWay}"
+                           Keyboard="Numeric"
+                           BackgroundColor="Transparent"
+                           TextColor="{StaticResource Gray300}"
+                           HeightRequest="40"
+                           Margin="10,0"/>
+                </Frame>
+
+                <!-- Date of Birth -->
+                <Label Text="Date of Birth" FontSize="14" TextColor="{StaticResource White}" Margin="0,0"/>
+                <Frame CornerRadius="10" BackgroundColor="{StaticResource White}" Padding="0" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                    <DatePicker Date="{Binding DateOfBirth, Mode=TwoWay}"
+                                Format="dd/MM/yyyy"
                                 BackgroundColor="Transparent"
                                 TextColor="{StaticResource Gray300}"
                                 HeightRequest="40"
                                 Margin="10,0"/>
-                    </Frame>
-                </HorizontalStackLayout>
-
-                <!-- Height -->
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Image Source="height_icon.svg"
-                           WidthRequest="30"
-                           HeightRequest="30"
-                           VerticalOptions="Center"/>
-                    <Frame CornerRadius="10"
-                           BackgroundColor="{StaticResource White}"
-                           Padding="5"
-                           BorderColor="{StaticResource Gray500}"
-                           HasShadow="False"
-                           WidthRequest="230">
-                        <Entry Placeholder="Height (cm)"
-                               Text="{Binding Height, Mode=TwoWay}"
-                               BackgroundColor="Transparent"
-                               TextColor="{StaticResource TextPrimary}"
-                               FontSize="16"
-                               Keyboard="Numeric"/>
-                    </Frame>
-                </HorizontalStackLayout>
-
-                <!-- Weight -->
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Image Source="weight_icon.svg"
-                           WidthRequest="30"
-                           HeightRequest="30"
-                           VerticalOptions="Center"/>
-                    <Frame CornerRadius="10"
-                           BackgroundColor="{StaticResource White}"
-                           Padding="5"
-                           BorderColor="{StaticResource Gray500}"
-                           HasShadow="False"
-                           WidthRequest="230">
-                        <Entry Placeholder="Weight (kg)"
-                               Text="{Binding Weight, Mode=TwoWay}"
-                               BackgroundColor="Transparent"
-                               TextColor="{StaticResource TextPrimary}"
-                               FontSize="16"
-                               Keyboard="Numeric"/>
-                    </Frame>
-                </HorizontalStackLayout>
-
-                <!-- Birth Date -->
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Image Source="birthday_icon.svg"
-                           WidthRequest="30"
-                           HeightRequest="30"
-                           VerticalOptions="Center"/>
-                    <Frame CornerRadius="10"
-                           BackgroundColor="{StaticResource White}"
-                           Padding="5"
-                           BorderColor="{StaticResource Gray500}"
-                           HasShadow="False"
-                           WidthRequest="230">
-                        <DatePicker Date="{Binding DateOfBirth, Mode=TwoWay}"
-                                    Format="dd/MM/yyyy"
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource Gray300}"
-                                    HeightRequest="40"
-                                    Margin="10,0"/>
-                    </Frame>
-                </HorizontalStackLayout>
+                </Frame>
 
             </VerticalStackLayout>
 
@@ -143,5 +101,4 @@
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

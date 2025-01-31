@@ -1,18 +1,26 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using Font = Microsoft.Maui.Font;
 
 namespace HealthApp
 {
     public partial class AppShell : Shell
     {
+        public IRelayCommand GoToProfileCommand { get; }
+
         public AppShell()
         {
             InitializeComponent();
             var currentTheme = Application.Current!.UserAppTheme;
+            GoToProfileCommand = new RelayCommand(GoToProfile);
             Routing.RegisterRoute(nameof(FoodPortionDetailsPage), typeof(FoodPortionDetailsPage));
             Routing.RegisterRoute(nameof(FoodMealDetailsPage), typeof(FoodMealDetailsPage));
             ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
+        }
+        private async void GoToProfile()
+        {
+            await Shell.Current.GoToAsync("profileMainPage");
         }
         public static async Task DisplaySnackbarAsync(string message)
         {

@@ -81,7 +81,6 @@ namespace HealthApp.Platforms.Android.Helpels
                 return [];
             }
 
-
             if (result is JavaList javaList)
             {
                 //convert java list to .net list
