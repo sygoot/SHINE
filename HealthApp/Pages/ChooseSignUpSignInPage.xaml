@@ -9,12 +9,6 @@
              BackgroundColor="{StaticResource PrimaryDark}"
              Title="Welcome to SHINE">
 
-    <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior
-                EventName="Appearing"
-                Command="{Binding AppearingCommand}" />
-    </ContentPage.Behaviors>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
@@ -45,8 +39,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 WidthRequest="200"
-                HeightRequest="50"
-                Command="{Binding SignUpCommand}" />
+                HeightRequest="50" />
 
         <!-- Sign In Button -->
         <Button Text="Sign In"
@@ -55,7 +48,6 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 WidthRequest="200"
-                HeightRequest="50"
-                Command="{Binding SignInCommand}" />
+                HeightRequest="50" />
     </Grid>
 </ContentPage>
