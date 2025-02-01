@@ -8,6 +8,13 @@ public partial class ChooseSignUpSignInPage : ContentPage
         BindingContext = model;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Dispatcher.Dispatch(async () => await ((ChooseSignUpSignInPageModel)BindingContext).AppearingAsync());
+    }
+
     private async void NavigateToLogin(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("login");
