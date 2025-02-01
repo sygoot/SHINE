@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using Microsoft.Extensions.Logging;
 
@@ -15,12 +14,12 @@ namespace HealthApp.PageModels
             _logger = logger;
         }
 
-        [RelayCommand]
-        public void Appearing()
+        public async Task AppearingAsync()
         {
             if (_firebaseAuthClient.User != null)
             {
-                Shell.Current.GoToAsync("//Main");
+
+                await Shell.Current.GoToAsync("//Main");
             }
         }
     }
