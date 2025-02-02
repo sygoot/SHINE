@@ -32,7 +32,7 @@ namespace HealthApp.FirestoreDatabase
             serviceCollection.AddTransient<Table<Sleep>, Tables.SleepTable>();
             serviceCollection.AddTransient<Table<Steps>, Tables.StepsTable>();
             serviceCollection.AddTransient<Table<Suggestion>, Tables.SuggestionTable>();
-            serviceCollection.AddTransient<Table<Target>, Tables.TargetTable>();
+            serviceCollection.AddTransient<ITargetTable, Tables.TargetTable>();
             serviceCollection.AddTransient<Table<Water>, Tables.WaterTable>();
 
             serviceCollection.AddTransient<IDatabaseService, DatabaseService>();

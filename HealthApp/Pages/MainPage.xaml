@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:chart="http://schemas.syncfusion.com/maui/toolkit"
              x:Class="HealthApp.Pages.MainPage"
              Title="Welcome, Username!"
              BackgroundColor="{StaticResource PrimaryDark}">
@@ -39,56 +40,142 @@
         </StackLayout>
 
         <!-- Emotka w środku -->
-        <Image Source="target.svg"
-                   WidthRequest="60"
-                   HeightRequest="60"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   Grid.Row="2" Grid.ColumnSpan="2">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Tapped="NavigateToTargetSelection" />
-            </Image.GestureRecognizers>
-        </Image>
+        <chart:SfCircularChart Grid.Row="2" Grid.ColumnSpan="2" Background="Transparent">
+            <chart:RadialBarSeries ItemsSource="{Binding TargetsData}" 
+                                   XBindingPath="Value" 
+                                   YBindingPath="Value" 
+                                   Radius="0.4"
+                                   EnableAnimation="True"
+                                   MaximumValue="100"
+                                   Fill="YellowGreen"
+                                   CapStyle="BothCurve">
+                <chart:RadialBarSeries.CenterView>
+                    <StackLayout HeightRequest="{Binding CenterHoleSize}"
+                         WidthRequest="{Binding CenterHoleSize}">
+                        <Image Source="target"
+                           WidthRequest="60"
+                           HeightRequest="60"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="NavigateToTargetSelection" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </chart:RadialBarSeries.CenterView>
+            </chart:RadialBarSeries>
+        </chart:SfCircularChart>
 
 
-        <!-- Ikona Sleep -->
-        <ImageButton Grid.Row="1" Grid.Column="0"
-                     Source="sleep.svg"
-                     WidthRequest="15"
-                     HeightRequest="15"
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
+        <chart:SfCircularChart Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent">
+            <chart:RadialBarSeries ItemsSource="{Binding SleepsData}" 
+                                   XBindingPath="Value" 
+                                   YBindingPath="Value" 
+                                   Radius="0.4"
+                                   EnableAnimation="True"
+                                   MaximumValue="100"
+                                   Fill="BlueViolet"
+                                   CapStyle="BothCurve">
+                <chart:RadialBarSeries.CenterView>
+                    <StackLayout HeightRequest="{Binding CenterHoleSize}"
+                         WidthRequest="{Binding CenterHoleSize}">
+                        <!-- Ikona Sleep -->
+                        <ImageButton 
+                             Source="sleep"
+                             WidthRequest="15"
+                             HeightRequest="15"
+                             BackgroundColor="Yellow"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
                      Clicked="NavigateToSleep" />
 
-        <!-- Ikona Steps -->
-        <ImageButton Grid.Row="1" Grid.Column="1"
-                     Source="steps.svg"
-                     WidthRequest="15"
-                     HeightRequest="15"
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Clicked="NavigateToSteps" />
+                    </StackLayout>
+                </chart:RadialBarSeries.CenterView>
+            </chart:RadialBarSeries>
+        </chart:SfCircularChart>
 
-        <!-- Ikona Nutrition -->
-        <ImageButton Grid.Row="3" Grid.Column="0"
-                     Source="nutrition.svg"
-                     WidthRequest="15"
-                     HeightRequest="15"
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Clicked="NavigateToFood" />
 
-        <!-- Ikona Hydration -->
-        <ImageButton Grid.Row="3" Grid.Column="1"
-                     Source="hydration.svg"
-                     WidthRequest="15"
-                     HeightRequest="15"
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Clicked="NavigateToWater" />
+        <chart:SfCircularChart Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent">
+            <chart:RadialBarSeries ItemsSource="{Binding StepsData}" 
+                                   XBindingPath="Value" 
+                                   YBindingPath="Value" 
+                                   Radius="0.4"
+                                   EnableAnimation="True"
+                                   MaximumValue="100"
+                                   Fill="RosyBrown"
+                                   CapStyle="BothCurve">
+                <chart:RadialBarSeries.CenterView>
+                    <StackLayout HeightRequest="{Binding CenterHoleSize}"
+                         WidthRequest="{Binding CenterHoleSize}">
+                        <!-- Ikona Steps -->
+                        <ImageButton 
+                             Source="steps"
+                             WidthRequest="15"
+                             HeightRequest="15"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Clicked="NavigateToSteps" />
+
+                    </StackLayout>
+                </chart:RadialBarSeries.CenterView>
+            </chart:RadialBarSeries>
+        </chart:SfCircularChart>
+
+        <chart:SfCircularChart Grid.Row="3" Grid.Column="0" BackgroundColor="Transparent">
+            <chart:RadialBarSeries ItemsSource="{Binding NutritionsData}" 
+                                   XBindingPath="Value" 
+                                   YBindingPath="Value" 
+                                   Radius="0.4"
+                                   EnableAnimation="True"
+                                   MaximumValue="100"
+                                   Fill="SaddleBrown"
+                                   CapStyle="BothCurve">
+                <chart:RadialBarSeries.CenterView>
+                    <StackLayout HeightRequest="{Binding CenterHoleSize}"
+                         WidthRequest="{Binding CenterHoleSize}">
+                        <!-- Ikona Nutrition -->
+                        <ImageButton 
+                             Source="nutrition"
+                             WidthRequest="15"
+                             HeightRequest="15"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Clicked="NavigateToFood" />
+
+                    </StackLayout>
+                </chart:RadialBarSeries.CenterView>
+            </chart:RadialBarSeries>
+        </chart:SfCircularChart>
+
+        <chart:SfCircularChart Grid.Row="3" Grid.Column="1" BackgroundColor="Transparent">
+            <chart:RadialBarSeries ItemsSource="{Binding HydrationsData}" 
+                                   XBindingPath="Value" 
+                                   YBindingPath="Value" 
+                                   Radius="0.4"
+                                   EnableAnimation="True"
+                                   MaximumValue="100"
+                                   Fill="Blue"
+                                   CapStyle="BothCurve">
+                <chart:RadialBarSeries.CenterView>
+                    <StackLayout HeightRequest="{Binding CenterHoleSize}"
+                         WidthRequest="{Binding CenterHoleSize}">
+                        <!-- Ikona Hydration -->
+                        <ImageButton
+                             Source="hydration"
+                             WidthRequest="15"
+                             HeightRequest="15"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Clicked="NavigateToWater" />
+
+                    </StackLayout>
+                </chart:RadialBarSeries.CenterView>
+            </chart:RadialBarSeries>
+        </chart:SfCircularChart>
+
+
     </Grid>
 </ContentPage>

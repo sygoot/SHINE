@@ -12,6 +12,7 @@ namespace HealthApp.FirestoreDatabase.Tables
     public class Table<T>(FirebaseClient firebaseClient, FirebaseAuthClient firebaseAuthClient) : Models.Services.Database.Tables.Table<T> where T : Entity
     {
         protected static readonly string TABLE_NAME = typeof(T).Name;
+        protected static readonly TimeSpan DEFAULT_TIMEOUT = TimeSpan.FromSeconds(5);
         protected readonly FirebaseClient firebaseClient = firebaseClient;
         protected readonly FirebaseAuthClient firebaseAuthClient = firebaseAuthClient;
 
@@ -67,10 +68,12 @@ namespace HealthApp.FirestoreDatabase.Tables
         {
             var loginUser = firebaseAuthClient.User;
 
-            return firebaseClient
+            return loginUser is null
+                ? Observable.Throw<IEnumerable<T>>(new Exception("Not login exception."))
+                : firebaseClient
                 .Child(TABLE_NAME)
                 .Child(loginUser.Uid)
-                .OnceAsync<T>()
+                .OnceAsync<T>(DEFAULT_TIMEOUT)
                 .ToObservable()
                 .Select(result => result.Select(element => element.Object).ToList());
         }
