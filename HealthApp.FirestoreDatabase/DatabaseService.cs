@@ -13,7 +13,7 @@ namespace HealthApp.FirestoreDatabase
         public Table<Sleep> SleepTable { get; private init; }
         public Table<Steps> StepsTable { get; private init; }
         public Table<Suggestion> SuggestionTable { get; private init; }
-        public Table<Target> TargetTable { get; private init; }
+        public ITargetTable TargetTable { get; private init; }
         public Table<Water> WaterTable { get; private init; }
 
         public DatabaseService(
@@ -23,7 +23,7 @@ namespace HealthApp.FirestoreDatabase
             Table<Sleep> sleepTable,
             Table<Steps> stepsTable,
             Table<Suggestion> suggestionTable,
-            Table<Target> targetTable,
+            ITargetTable targetTable,
             Table<Water> waterTable)
         {
             UserTable = userTable;

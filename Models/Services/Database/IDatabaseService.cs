@@ -10,7 +10,7 @@ namespace Models.Services.Database
         public Table<Sleep> SleepTable { get; }
         public Table<Steps> StepsTable { get; }
         public Table<Suggestion> SuggestionTable { get; }
-        public Table<Target> TargetTable { get; }
+        public ITargetTable TargetTable { get; }
         public Table<Water> WaterTable { get; }
     }
 }
